@@ -6,7 +6,12 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import {AuthenticationService} from './services-api/AuthenticationService';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -18,7 +23,13 @@ import {TranslateModule} from '@ngx-translate/core';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    TranslateModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
   providers: [AuthenticationService, HttpClient],
   bootstrap: [AppComponent]
