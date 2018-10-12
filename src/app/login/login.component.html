@@ -1,20 +1,23 @@
 <div class="col-md-12">
   <form #loginForm="ngForm" (ngSubmit)="save(loginForm)" id="loginForm">
-    <div class="col-md-3 col-offset-2">
-      <label for="login"><span class="form-required"></span>LOGIN</label>
+    <div class="form-group">
+      <div class="col-md-3 col-offset-2">
+        <label for="login"><span class="form-required"></span>{{ 'login' | translate }}</label>
+      </div>
+      <div class="col-md-4">
+        <input type="text" id ="login" name="login" maxlength="50"
+               [(ngModel)]="user.login" required #libelle="ngModel" placeholder="{{ 'placeholder.enter.login' | translate}}" />
+      </div>
     </div>
-    <div class="col-md-4">
-      <input type="text" id ="login" name="login" maxlength="50"
-             [(ngModel)]="user.login" required #libelle="ngModel" />
+    <div class="form-group">
+      <div class="col-md-3 col-offset-2">
+        <label for="password"><span class="form-required"></span>{{ 'placeholder.password' | translate}}</label>
+      </div>
+      <div class="col-md-4">
+        <input type="password" id ="password" name="password" maxlength="50"
+               [(ngModel)]="user.password" required #libelle="ngModel" placeholder="{{ 'placeholder.password' | translate}}"/>
+      </div>
     </div>
-
-    <div class="col-md-3 col-offset-2">
-      <label for="password"><span class="form-required"></span>PASSWORD</label>
-    </div>
-    <div class="col-md-4">
-      <input type="text" id ="password" name="password" maxlength="50"
-             [(ngModel)]="user.password" required #libelle="ngModel" />
-    </div>
-    <button (submit)="save(loginForm)">{{'buttons.submit' | translate }}</button>
+    <button type="submit" class="btn btn-primary" (submit)="save(loginForm)">{{ 'login' | translate }}</button>
   </form>
 </div>
