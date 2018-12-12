@@ -2,6 +2,7 @@
   "application.title": "KUREUIL",
   "home": "Home",
   "welcome.message": "Welcome in KUREUIL",
+  "login": "Login",
 
   "buttons": {
     "add": "Add",
@@ -32,5 +33,10 @@
     "title.plural": "Members",
     "edit": "Edit members",
     "manage": "Manage members"
+  },
+
+  "placeholder": {
+    "enter.login": "Enter login",
+    "password": "Password"
   }
 }
