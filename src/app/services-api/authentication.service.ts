@@ -19,4 +19,10 @@ export class AuthenticationService {
   login(user: User): Observable<User> {
     return this.http.post<User>('api/login', user);
   }
+
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('isLoggedIn');
+  }
 }
