@@ -26,6 +26,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NavbarComponent
   ],
   imports: [
+    NgbModule,
     RouterModule.forRoot(routes, {useHash: true}),
     NgbModule,
     BrowserModule,
