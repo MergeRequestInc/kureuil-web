@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
     console.log(this.user);
     this.authenticationService.login(this.user).subscribe((userConnected) => {
       this.user = userConnected;
-      localStorage.setItem('isLoggedIn', 'true');
     });
   }
 }
