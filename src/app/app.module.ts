@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import {RouterModule} from '@angular/router';
 import {routes} from './app-routing.module';
+import {RegisterComponent} from './register/register.component';
+import {UserService} from './services-api/user.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -22,6 +24,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     HomeComponent,
     NavbarComponent
   ],
@@ -42,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
-  providers: [AuthenticationService, HttpClient],
+  providers: [AuthenticationService, HttpClient, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
