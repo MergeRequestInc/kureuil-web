@@ -20,12 +20,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent
   ],
   imports: [
-    NgbModule.forRoot(),
+    NgbModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
