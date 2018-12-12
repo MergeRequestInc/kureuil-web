@@ -1,41 +1,29 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {LoginComponent} from './login.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {HttpClient, HttpHandler} from '@angular/common/http';
-import {HttpLoaderFactory} from '../app.module';
-import {AuthenticationService} from '../services-api/AuthenticationService';
+import { LoginComponent } from './login.component';
+import {FormsModule} from '@angular/forms';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('LoginComponent', () => {
-  let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+    let component: LoginComponent;
+    let fixture: ComponentFixture<LoginComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
-      imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
-        }
-      })],
-      providers: [AuthenticationService, HttpClient, HttpHandler]
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [ LoginComponent ],
+            imports: [FormsModule, RouterTestingModule, HttpClientTestingModule]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(LoginComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

@@ -5,7 +5,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpLoaderFactory} from './app.module';
 import {HttpClient, HttpHandler} from '@angular/common/http';
-import {AuthenticationService} from './services-api/AuthenticationService';
+import {AuthenticationService} from './services-api/authentication.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

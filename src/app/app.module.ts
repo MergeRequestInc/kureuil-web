@@ -5,7 +5,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
-import {AuthenticationService} from './services-api/AuthenticationService';
+import {AuthenticationService} from './services-api/authentication.service';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
@@ -30,6 +30,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RouterModule.forRoot(routes, {useHash: true}),
     NgbModule,
     BrowserModule,
+    RouterModule.forRoot(routes, { useHash: true}),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
