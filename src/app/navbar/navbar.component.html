@@ -1,0 +1,5 @@
+<h1>K.U.R.E.U.I.L.</h1>
+<ul class="nav nav-pills nav-stacked">
+    <li role="presentation" class="nav-item nav-link" *ngIf="!isLoggedIn" routerLink="/login">Login</li>
+    <li role="presentation" class="nav-item nav-link" *ngIf="isLoggedIn" (click)="logout()">Logout</li>
+</ul>
