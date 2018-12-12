@@ -1,0 +1,36 @@
+{
+  "application.title": "KUREUIL",
+  "home": "Home",
+  "welcome.message": "Welcome in KUREUIL",
+
+  "buttons": {
+    "add": "Add",
+    "delete": "Delete",
+    "edit": "Edit",
+    "submit": "Submit",
+    "validate": "Validate",
+    "cancel": "Cancel",
+    "login": "Login",
+    "signup": "Sign up",
+    "remove": "Remove"
+  },
+
+  "channel": {
+    "title.singular": "Channel",
+    "title.plural": "Channels",
+    "create": "Create channel",
+    "remove": "Remove channel"
+  },
+
+  "link": {
+    "edit": "Edit link",
+    "add": "Add link"
+  },
+
+  "member": {
+    "title.singular": "Member",
+    "title.plural": "Members",
+    "edit": "Edit members",
+    "manage": "Manage members"
+  }
+}
