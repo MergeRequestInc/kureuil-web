@@ -15,6 +15,9 @@ import {RouterModule} from '@angular/router';
 import {routes} from './app-routing.module';
 import {RegisterComponent} from './register/register.component';
 import {UserService} from './services-api/user.service';
+import {ToastModule} from 'primeng/toast';
+import {MessageService} from 'primeng/api';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,10 +36,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     RouterModule.forRoot(routes, {useHash: true}),
     NgbModule,
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(routes, { useHash: true}),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ToastModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -45,7 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
-  providers: [AuthenticationService, HttpClient, UserService],
+  providers: [AuthenticationService, HttpClient, UserService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

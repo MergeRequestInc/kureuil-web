@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '../services-api/authentication.service';
 import {User} from '../model/user';
+import {MessageService} from 'primeng/api';
 
 @Component({
     selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService) { }
+        private authenticationService: AuthenticationService,
+        private messageService: MessageService) { }
 
     ngOnInit() {
         // reset login status
@@ -38,8 +40,15 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('idUserConnected', JSON.stringify(user.id));
                     window.location.href = '/';
                 },
-                () => {
-                    // TODO this.alertService.error('Login impossible. Please verify your login and password.');
+                (error) => {
+                  console.log(error);
+                  if (error.status === 404 || error.status === 500) {
+                    this.messageService.add({severity: 'error', summary: 'Error',
+                      detail: 'An error occured. Please contact an administrator.'});
+                  } else {
+                    this.messageService.add({severity: 'error', summary: 'Error',
+                      detail: 'Login impossible. Please verify your login and password.'});
+                  }
                     this.loading = false;
                 });
     }
