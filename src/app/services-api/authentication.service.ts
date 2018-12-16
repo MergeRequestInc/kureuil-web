@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../model/user';
+import {SERVER_API_URL} from '../app.constants';
+import {map} from 'rxjs/operators';
 
 /**
  * Authentication service
@@ -16,8 +18,17 @@ export class AuthenticationService {
   /**
    * User is logging in
    */
-  login(user: User): Observable<User> {
-    return this.http.post<User>('api/login', user);
+  login(mail: string, password: string): Observable<any> {
+    const data = {mail: mail, password: password};
+    return this.http.post(SERVER_API_URL + 'api/login', data, {observe: 'response'}).pipe(map(authenticateSuccess.bind(this)));
+
+    function authenticateSuccess(resp) {
+      const bearerToken = resp.headers.get('Authorization');
+      if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
+        const jwt = bearerToken.slice(7, bearerToken.length);
+        return jwt;
+      }
+    }
   }
 
   logout() {
