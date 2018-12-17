@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AuthenticationService} from '../services-api/authentication.service';
-import {User} from '../model/user';
+import {AuthenticationService} from '../../services-api/authentication.service';
+import {User} from '../../model/user';
 import {MessageService} from 'primeng/api';
 
 @Component({
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
      */
     login() {
         this.loading = true;
-        this.authenticationService.login(this.model)
+        this.authenticationService.login(this.model.login, this.model.password)
             .subscribe(
                 (user: User) => {
                     localStorage.setItem('isLoggedIn', 'true');

@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {User} from '../model/user';
-import {SERVER_API_URL} from '../app.constants';
+import {SERVER_API_URL} from '../services-common/constants/app.constants';
 import {map} from 'rxjs/operators';
 
 /**

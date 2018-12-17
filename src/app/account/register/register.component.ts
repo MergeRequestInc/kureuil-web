@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {UserService} from '../services-api/user.service';
-import {User} from '../model/user';
 import {MessageService} from 'primeng/api';
+import {User} from '../../model/user';
+import {UserService} from '../../services-api/user.service';
 
 @Component({
   selector: 'app-register',

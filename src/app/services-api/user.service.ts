@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {User} from '../model/user';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {SERVER_API_URL} from '../app.constants';
+import {SERVER_API_URL} from '../services-common/constants/app.constants';
 
 @Injectable({
   providedIn: 'root'
