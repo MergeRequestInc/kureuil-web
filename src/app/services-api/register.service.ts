@@ -10,6 +10,6 @@ export class RegisterService {
 
     save(email: string, password: string): Observable<any> {
       const data = {email: email, password: password};
-        return this.http.post(SERVER_API_URL + 'api/register', data);
+        return this.http.post(SERVER_API_URL + 'register', data);
     }
 }

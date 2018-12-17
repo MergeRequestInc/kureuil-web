@@ -19,7 +19,7 @@ export class AuthenticationService {
    */
   login(email: string, password: string): Observable<any> {
     const data = {email: email, password: password};
-    return this.http.post(SERVER_API_URL + 'api/login', data, {observe: 'response'}).pipe(map(authenticateSuccess.bind(this)));
+    return this.http.post(SERVER_API_URL + 'login', data, {observe: 'response'}).pipe(map(authenticateSuccess.bind(this)));
 
     function authenticateSuccess(resp) {
       const bearerToken = resp.headers.get('Authorization');
