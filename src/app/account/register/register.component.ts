@@ -24,6 +24,7 @@ export class RegisterComponent {
       .subscribe(
         () => {
           this.messageService.add({severity: 'success', summary: 'Success', detail: 'Registration successful'});
+          this.loading = false;
           this.router.navigate(['login']);
         },
         () => {
