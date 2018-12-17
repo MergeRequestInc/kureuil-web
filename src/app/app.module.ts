@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {AuthenticationService} from './services-api/authentication.service';
@@ -18,6 +19,9 @@ import {UserService} from './services-api/user.service';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgxWebstorageModule} from 'ngx-webstorage';
+import {AuthExpiredInterceptor} from './services-common/interceptor/auth-expired.interceptor';
+import {AuthInterceptor} from './services-common/interceptor/auth.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,6 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   imports: [
     NgbModule,
     RouterModule.forRoot(routes, {useHash: true}),
+    NgxWebstorageModule.forRoot(),
     NgbModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -50,7 +55,22 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
-  providers: [AuthenticationService, HttpClient, UserService, MessageService],
+  providers: [
+    AuthenticationService,
+    HttpClient,
+    UserService,
+    MessageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthExpiredInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
