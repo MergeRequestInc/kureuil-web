@@ -22,6 +22,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {AuthExpiredInterceptor} from './services-common/interceptor/auth-expired.interceptor';
 import {AuthInterceptor} from './services-common/interceptor/auth.interceptor';
+import { TagsUrlComponent } from './ia/tags-url/tags-url.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,7 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    TagsUrlComponent
   ],
   imports: [
     NgbModule,

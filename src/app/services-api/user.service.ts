@@ -15,7 +15,7 @@ export class UserService {
      * Get all the users (as admin)
      */
     getAll(): Observable<User[]> {
-        return this.http.get<User[]>(SERVER_API_URL + `api/users`);
+        return this.http.get<User[]>(SERVER_API_URL + `users`);
     }
 
     /**
@@ -23,7 +23,7 @@ export class UserService {
      * @param id : user's id
      */
     getById(id: number) {
-        return this.http.get(SERVER_API_URL + `api/users/` + id);
+        return this.http.get(SERVER_API_URL + `users/` + id);
     }
 
     /**
@@ -31,7 +31,7 @@ export class UserService {
      * @param user: user to create
      */
     create(user: User) {
-        return this.http.post(SERVER_API_URL + `api/users`, user);
+        return this.http.post(SERVER_API_URL + `users`, user);
         // return localStorage.setItem('isLoggedIn', 'true'); // A TESTER
     }
 
@@ -40,7 +40,7 @@ export class UserService {
      * @param user: user to update
      */
     update(user: User) {
-        return this.http.put(SERVER_API_URL + `api/users`, user);
+        return this.http.put(SERVER_API_URL + `users`, user);
     }
 
     /**
@@ -48,6 +48,6 @@ export class UserService {
      * @param id: user's id to delete
      */
     delete(id: number) {
-        return this.http.delete(SERVER_API_URL + `api/users/` + id);
+        return this.http.delete(SERVER_API_URL + `users/` + id);
     }
 }
