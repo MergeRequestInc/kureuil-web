@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {MessageService} from 'primeng/api';
 import {User} from '../../model/user';
-import {UserService} from '../../services-api/user.service';
+import {RegisterService} from '../../services-api/register.service';
 
 @Component({
   selector: 'app-register',
@@ -15,12 +15,12 @@ export class RegisterComponent {
 
   constructor(
     private router: Router,
-    private userService: UserService,
+    private registerService: RegisterService,
     private messageService: MessageService) { }
 
   register() {
     this.loading = true;
-    this.userService.create(this.model)
+    this.registerService.save(this.model.login, this.model.password)
       .subscribe(
         () => {
           this.messageService.add({severity: 'success', summary: 'Success', detail: 'Registration successful'});

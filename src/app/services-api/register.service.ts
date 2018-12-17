@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from '../services-common/constants/app.constants';
 
 @Injectable({ providedIn: 'root' })
-export class Register {
+export class RegisterService {
     constructor(private http: HttpClient) {}
 
-    save(account: any): Observable<any> {
-        return this.http.post(SERVER_API_URL + 'api/register', account);
+    save(email: string, password: string): Observable<any> {
+      const data = {email: email, password: password};
+        return this.http.post(SERVER_API_URL + 'api/register', data);
     }
 }
