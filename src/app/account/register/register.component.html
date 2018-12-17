@@ -1,19 +1,67 @@
 <div class="col-md-6 col-md-offset-3">
   <p-toast></p-toast>
-  <h2>Register</h2>
+  <h2>Registration</h2>
   <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !loginId.valid }">
-      <label for="loginId">Login</label>
-      <input type="text" class="form-control" name="loginId" [(ngModel)]="model.login" #loginId="ngModel" required />
-      <div *ngIf="f.submitted && !loginId.valid" class="help-block">Login is required</div>
+    <!-- Email -->
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !emailId.valid }">
+      <label for="emailId">Email</label>
+      <input type="email" class="form-control"
+             name="emailId"
+             [(ngModel)]="model.email"
+             placeholder="Your email"
+             #emailId="ngModel"
+             minlength=5
+             maxlength=254
+             email
+             required/>
+      <!-- Email error messages -->
+      <div *ngIf="emailId.dirty && emailId.invalid">
+        <small class="form-text text-danger" *ngIf="emailId?.errors.required">
+          Your email is required.
+        </small>
+        <small class="form-text text-danger" *ngIf="emailId?.errors.invalid">
+          Your email is invalid.
+        </small>
+        <small class="form-text text-danger" *ngIf="emailId?.errors.minlength">
+          Your email is required to be at least 5 characters.
+        </small>
+        <small class="form-text text-danger" *ngIf="emailId?.errors.maxlength">
+          Your email cannot be longer than 100 characters.
+        </small>
+      </div> <!-- End email error messages -->
     </div>
+
+    <!-- Password -->
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
       <label for="password">Password</label>
-      <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
-      <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+      <input type="password"
+             class="form-control"
+             name="password"
+             [(ngModel)]="model.password"
+             #password="ngModel"
+             minlength=4
+             maxlength=50
+             placeholder="Your password"
+             required />
+      <div *ngIf="password.dirty && password.invalid">
+        <small class="form-text text-danger" *ngIf="password?.errors.required"
+        >
+          Your password is required.
+        </small>
+        <small class="form-text text-danger" *ngIf="password?.errors.minlength"
+        >
+          Your password is required to be at least 4 characters.
+        </small>
+        <small class="form-text text-danger" *ngIf="password?.errors.maxlength"
+        >
+          Your password cannot be longer than 50 characters.
+        </small>
+      </div>
     </div>
+
+    <!-- Form buttons -->
     <div class="form-group">
-      <button [disabled]="loading" class="btn btn-primary">Register</button>
+      <button [disabled]="loading || f.form.invalid" class="btn btn-primary">Register</button>
       <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
       <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
     </div>
