@@ -1,11 +1,13 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import {LoginComponent} from './login/login.component';
+import {LoginComponent} from './account/login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {HttpLoaderFactory} from './app.module';
 import {HttpClient, HttpHandler} from '@angular/common/http';
 import {AuthenticationService} from './services-api/authentication.service';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -17,6 +19,7 @@ describe('AppComponent', () => {
       imports: [
         FormsModule,
         ReactiveFormsModule,
+        RouterTestingModule,
         TranslateModule.forRoot({
           loader: {
             provide: TranslateLoader,
@@ -24,7 +27,8 @@ describe('AppComponent', () => {
             deps: [HttpClient]
           }
         })],
-      providers: [AuthenticationService, HttpClient, HttpHandler]
+      providers: [AuthenticationService, HttpClient, HttpHandler],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents();
   }));
 
@@ -38,12 +42,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('KUREUIL');
-  });
-
-  it('should render title in a nav tag', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('nav').textContent).toContain('KUREUIL');
   });
 });

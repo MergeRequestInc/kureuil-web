@@ -65,19 +65,6 @@ describe('UserService', () => {
         expect(actualData).toEqual(expectedUser01);
     });
 
-    it('should call PUT method (ban a user) and return the result', () => {
-        let actualData = {};
-        expectedUser01.login = 'test';
-
-        service.ban(expectedUser01).subscribe(data => actualData = data);
-
-        backend.expectOne((req: HttpRequest<any>) => {
-            return req.url === 'http://localhost:8080/api/users/ban' && req.method === 'PUT';
-        }, `PUT update active field from ${'api/users/ban'}`)
-            .flush(expectedUser01);
-        expect(actualData).toEqual(expectedUser01);
-    });
-
     it('should call POST method (create user) and return the result', () => {
         let actualData = {};
         expectedUser01.id = undefined;
