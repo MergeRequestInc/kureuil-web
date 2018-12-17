@@ -18,8 +18,8 @@ export class AuthenticationService {
   /**
    * User is logging in
    */
-  login(mail: string, password: string): Observable<any> {
-    const data = {mail: mail, password: password};
+  login(email: string, password: string): Observable<any> {
+    const data = {email: email, password: password};
     return this.http.post(SERVER_API_URL + 'api/login', data, {observe: 'response'}).pipe(map(authenticateSuccess.bind(this)));
 
     function authenticateSuccess(resp) {
