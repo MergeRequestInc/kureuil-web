@@ -31,7 +31,7 @@ export class ChangePwdComponent implements OnInit {
       this.passwordService.changePassword(this.model.password).subscribe(
         () => {
           this.messageService.add({severity: 'success', summary: 'Success',
-            detail: 'Youre password has been changed.' });
+            detail: 'Your password has been changed.' });
         },
         (error) => {
           console.log(error);
