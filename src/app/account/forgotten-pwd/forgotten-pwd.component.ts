@@ -35,7 +35,7 @@ export class ForgottenPwdComponent implements OnInit {
             severity: 'error', summary: 'Error',
             detail: 'An Error occured. Please contact an administrator.'
           });
-        }else {
+        } else {
           this.messageService.add({severity: 'error', summary: 'error',
             detail: 'E mail not found. Please try again.' });
         }

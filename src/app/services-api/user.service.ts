@@ -26,7 +26,7 @@ export class UserService {
         return this.http.get(SERVER_API_URL + `users/` + id);
     }
 
-    getByEmail(email: string){
+    getByEmail(email: string) {
       return this.http.get(SERVER_API_URL + 'users/' + email);
     }
 

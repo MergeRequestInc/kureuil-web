@@ -25,10 +25,9 @@ export class ChangePwdComponent implements OnInit {
 
   changePwd(){
     this.loading = true;
-    if (this.model.password === this.confirmPassword)
-    {
+    if (this.model.password === this.confirmPassword) {
       //changing password
-    }else {
+    } else {
       this.messageService.add({severity: 'error', summary: 'Error',
       detail: 'Error: The two passwords don\'t match.'});
     }
