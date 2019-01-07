@@ -20,7 +20,7 @@ export class RegisterComponent {
 
   register() {
     this.loading = true;
-    this.registerService.save(this.model.login, this.model.password)
+    this.registerService.save(this.model.email, this.model.password)
       .subscribe(
         () => {
           this.messageService.add({severity: 'success', summary: 'Success', detail: 'Registration successful'});
