@@ -25,9 +25,9 @@ export class ForgottenPwdComponent implements OnInit {
 
   checkEmail() {
     this.userService.getByEmail(this.model.email).subscribe(
-      (user: User) => {
-        //Add Send Email function
-        window.location.href = '/';
+      () => {
+        this.messageService.add({severity: 'success', summary: 'Success',
+          detail: 'A new password has been sent. Please check your mailbox.' });
       }, (error) => {
         console.log(error);
         if (error.status === 404 || error.status === 500) {
