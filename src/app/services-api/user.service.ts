@@ -4,6 +4,9 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {SERVER_API_URL} from '../services-common/constants/app.constants';
 
+/**
+ * Service for operations linked to User entity
+ */
 @Injectable({
   providedIn: 'root'
 })

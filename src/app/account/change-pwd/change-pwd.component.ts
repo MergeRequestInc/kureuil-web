@@ -5,6 +5,9 @@ import {UserService} from '../../services-api/user.service';
 import {MessageService} from 'primeng/api';
 import {PasswordService} from '../../services-api/password.service';
 
+/**
+ * Component to change password
+ */
 @Component({
   selector: 'app-change-pwd',
   templateUrl: './change-pwd.component.html',
@@ -25,6 +28,9 @@ export class ChangePwdComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Change the user's password
+   */
   changePwd() {
     this.loading = true;
     if (this.model.password === this.confirmPassword) {

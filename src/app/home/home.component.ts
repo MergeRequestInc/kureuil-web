@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
+/**
+ * Home component
+ */
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

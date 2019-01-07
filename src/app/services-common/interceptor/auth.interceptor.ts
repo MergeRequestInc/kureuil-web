@@ -5,6 +5,9 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 
 import { SERVER_API_URL } from '../constants/app.constants';
 
+/**
+ * Interceptor for all requests and if the user is connected, set a header with the token
+ */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
     constructor(private localStorage: LocalStorageService, private sessionStorage: SessionStorageService) {}

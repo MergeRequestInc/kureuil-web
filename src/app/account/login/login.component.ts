@@ -4,6 +4,9 @@ import {AuthenticationService} from '../../services-api/authentication.service';
 import {User} from '../../model/user';
 import {MessageService} from 'primeng/api';
 
+/**
+ * Component for login
+ */
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',

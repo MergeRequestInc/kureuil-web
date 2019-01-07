@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 
 import { SERVER_API_URL } from '../services-common/constants/app.constants';
 
+/**
+ * Service linked to operations linked to registration
+ */
 @Injectable({ providedIn: 'root' })
 export class RegisterService {
     constructor(private http: HttpClient) {}

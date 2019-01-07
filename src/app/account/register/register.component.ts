@@ -4,6 +4,9 @@ import {MessageService} from 'primeng/api';
 import {User} from '../../model/user';
 import {RegisterService} from '../../services-api/register.service';
 
+/**
+ * Component for registration
+ */
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -18,6 +21,9 @@ export class RegisterComponent {
     private registerService: RegisterService,
     private messageService: MessageService) { }
 
+  /**
+   * Registration of the user
+   */
   register() {
     this.loading = true;
     this.registerService.save(this.model.email, this.model.password)
