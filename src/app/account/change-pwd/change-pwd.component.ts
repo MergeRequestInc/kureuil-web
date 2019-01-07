@@ -3,6 +3,7 @@ import {User} from '../../model/user';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../services-api/user.service';
 import {MessageService} from 'primeng/api';
+import {PasswordService} from '../../services-api/password.service';
 
 @Component({
   selector: 'app-change-pwd',
@@ -18,7 +19,8 @@ export class ChangePwdComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private userService: UserService,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private passwordService: PasswordService) { }
 
   ngOnInit() {
   }
@@ -26,7 +28,14 @@ export class ChangePwdComponent implements OnInit {
   changePwd() {
     this.loading = true;
     if (this.model.password === this.confirmPassword) {
-      // changing password
+      this.passwordService.changePassword(this.model.password).subscribe(
+        () => {
+          // TODO success message
+        },
+        () => {
+          // TODO error message
+        }
+      );
     } else {
       this.messageService.add({severity: 'error', summary: 'Error',
       detail: 'Error: The two passwords don\'t match.'});
