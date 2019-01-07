@@ -4,6 +4,7 @@ import {UserService} from './user.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {User} from '../model/user';
 import {HttpRequest} from '@angular/common/http';
+import {SERVER_API_URL} from '../services-common/constants/app.constants';
 
 describe('UserService', () => {
     const expectedUser01 = new User(1, 'login', 'mail', 'password');
@@ -34,7 +35,7 @@ describe('UserService', () => {
         service.getAll().subscribe(data => actualDataAll = data);
 
         backend.expectOne((req: HttpRequest<any>) => {
-            return req.url === 'http://localhost:8080/api/users' && req.method === 'GET';
+            return req.url === (SERVER_API_URL + 'users') && req.method === 'GET';
         }, `GET all Users from ${'api/users'}`)
             .flush(expectedUsers);
         expect(actualDataAll).toEqual(expectedUsers);
@@ -46,7 +47,7 @@ describe('UserService', () => {
         service.getById(1).subscribe(data => actualData = data);
 
         backend.expectOne((req: HttpRequest<any>) => {
-            return req.url === 'http://localhost:8080/api/users/1' && req.method === 'GET';
+            return req.url === (SERVER_API_URL + 'users/1') && req.method === 'GET';
         }, `GET one user from ${'api/users/1'}`)
             .flush(expectedUser01);
         expect(actualData).toEqual(expectedUser01);
@@ -54,12 +55,12 @@ describe('UserService', () => {
 
     it('should call PUT method (update a user) and return the result', () => {
         let actualData = {};
-        expectedUser01.login = 'test';
+        expectedUser01.email = 'test';
 
         service.update(expectedUser01).subscribe(data => actualData = data);
 
         backend.expectOne((req: HttpRequest<any>) => {
-            return req.url === 'http://localhost:8080/api/users' && req.method === 'PUT';
+            return req.url === (SERVER_API_URL + 'users') && req.method === 'PUT';
         }, `PUT update active field from ${'api/users'}`)
             .flush(expectedUser01);
         expect(actualData).toEqual(expectedUser01);
@@ -72,7 +73,7 @@ describe('UserService', () => {
         service.create(expectedUser01).subscribe(data => actualData = data);
 
         backend.expectOne((req: HttpRequest<any>) => {
-            return req.url === 'http://localhost:8080/api/users' && req.method === 'POST';
+            return req.url === (SERVER_API_URL + 'users') && req.method === 'POST';
         }, `POST create user from ${'api/users'}`)
             .flush(expectedUser01);
         expect(actualData).toEqual(expectedUser01);
