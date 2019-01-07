@@ -30,10 +30,20 @@ export class ChangePwdComponent implements OnInit {
     if (this.model.password === this.confirmPassword) {
       this.passwordService.changePassword(this.model.password).subscribe(
         () => {
-          // TODO success message
+          this.messageService.add({severity: 'success', summary: 'Success',
+            detail: 'Youre password has been changed.' });
         },
-        () => {
-          // TODO error message
+        (error) => {
+          console.log(error);
+          if (error.status === 404 || error.status === 500) {
+            this.messageService.add({
+              severity: 'error', summary: 'Error',
+              detail: 'An Error occured. Please contact an administrator.'
+            });
+          } else {
+            this.messageService.add({severity: 'error', summary: 'error',
+              detail: 'An error occured. Please try again later.' });
+          }
         }
       );
     } else {
