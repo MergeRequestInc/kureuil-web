@@ -11,7 +11,7 @@ import {MessageService} from 'primeng/api';
 })
 export class ChangePwdComponent implements OnInit {
   model: User = new User();
-  confirmPassword: string
+  confirmPassword: string;
   loading = false;
 
   constructor(
@@ -23,10 +23,10 @@ export class ChangePwdComponent implements OnInit {
   ngOnInit() {
   }
 
-  changePwd(){
+  changePwd() {
     this.loading = true;
     if (this.model.password === this.confirmPassword) {
-      //changing password
+      // changing password
     } else {
       this.messageService.add({severity: 'error', summary: 'Error',
       detail: 'Error: The two passwords don\'t match.'});
