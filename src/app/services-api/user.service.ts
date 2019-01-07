@@ -26,6 +26,10 @@ export class UserService {
         return this.http.get(SERVER_API_URL + `users/` + id);
     }
 
+    getByEmail(email: string){
+      return this.http.get(SERVER_API_URL + 'users/' + email);
+    }
+
     /**
      * Create a user
      * @param user: user to create
