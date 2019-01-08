@@ -1,5 +1,6 @@
 <nav class="navbar navbar-dark bg-dark mb-5">
-  <a class="navbar-brand" routerLink="/">Home</a>
+  <a *ngIf="!isLoggedIn" class="navbar-brand" routerLink="/login">Home</a>
+  <a *ngIf="isLoggedIn" class="navbar-brand" routerLink="/">Home</a>
   <div class="navbar-expand mr-auto">
     <div class="navbar-nav">
       <a *ngIf="!isLoggedIn" class="nav-item nav-link" routerLink="/login">Log In</a>
