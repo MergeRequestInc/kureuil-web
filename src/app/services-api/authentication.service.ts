@@ -30,9 +30,19 @@ export class AuthenticationService {
     }
   }
 
+  /**
+   * Disconnect the current user
+   */
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
     localStorage.removeItem('isLoggedIn');
+  }
+
+  /**
+   * Check if current user is logged in
+   */
+  isLogin() {
+    return !!localStorage.getItem('isLoggedIn');
   }
 }
