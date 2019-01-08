@@ -13,4 +13,8 @@ export class PasswordService {
   changePassword(newPassword: string): Observable<any> {
     return this.http.post(SERVER_API_URL + 'api/account/change-password', newPassword);
   }
+
+  resetPassword(email: string): Observable<any> {
+    return this.http.post(SERVER_API_URL + 'api/account/reset-password/init', email);
+  }
 }

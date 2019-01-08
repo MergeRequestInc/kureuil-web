@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../model/user';
 import {MessageService} from 'primeng/api';
-import {UserService} from '../../services-api/user.service';
+import {PasswordService} from '../../services-api/password.service';
 
 @Component({
   selector: 'app-forgotten-pwd',
@@ -12,19 +12,18 @@ import {UserService} from '../../services-api/user.service';
 export class ForgottenPwdComponent implements OnInit {
   model: User = new User();
   loading = false;
-  returnUrl: string;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService,
+    private passwordService: PasswordService,
     private messageService: MessageService) {  }
 
   ngOnInit() {
   }
 
   checkEmail() {
-    this.userService.getByEmail(this.model.email).subscribe(
+    this.passwordService.resetPassword(this.model.email).subscribe(
       () => {
         this.messageService.add({severity: 'success', summary: 'Success',
           detail: 'A new password has been sent. Please check your mailbox.' });
