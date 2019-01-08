@@ -4,6 +4,9 @@ import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 import {AuthenticationService} from '../../services-api/authentication.service';
 
+/**
+ * Interceptor for 401 errors
+ */
 @Injectable()
 export class AuthExpiredInterceptor implements HttpInterceptor {
     constructor(private authService: AuthenticationService) {}

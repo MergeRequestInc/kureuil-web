@@ -4,6 +4,9 @@ import {User} from '../../model/user';
 import {MessageService} from 'primeng/api';
 import {PasswordService} from '../../services-api/password.service';
 
+/**
+ * Component for retrieving a lost password
+ */
 @Component({
   selector: 'app-forgotten-pwd',
   templateUrl: './forgotten-pwd.component.html',
@@ -22,6 +25,9 @@ export class ForgottenPwdComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Check if the email of the form is linked to an existing user
+   */
   checkEmail() {
     this.passwordService.resetPassword(this.model.email).subscribe(
       () => {
@@ -42,5 +48,4 @@ export class ForgottenPwdComponent implements OnInit {
       }
     );
   }
-
 }
