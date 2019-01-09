@@ -11,8 +11,8 @@ import { SERVER_API_URL } from '../services-common/constants/app.constants';
 export class RegisterService {
     constructor(private http: HttpClient) {}
 
-    save(email: string, password: string): Observable<any> {
-      const data = {email: email, password: password};
-        return this.http.post(SERVER_API_URL + 'register', data);
+    save(name: string, email: string, password: string): Observable<any> {
+      const data = {name: name, email: email, password: password};
+        return this.http.post(SERVER_API_URL + 'user/register', data);
     }
 }
