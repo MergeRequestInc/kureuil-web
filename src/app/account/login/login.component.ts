@@ -38,12 +38,13 @@ export class LoginComponent implements OnInit {
         this.loading = true;
         this.authenticationService.login(this.model.email, this.model.password)
             .subscribe(
-                (user: User) => {
+                (response) => {
                     localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('idUserConnected', JSON.stringify(user.id));
+                    localStorage.setItem('Authorization', response);
                     window.location.href = '/';
                 },
                 (error) => {
+                  console.log('error');
                   console.log(error);
                   if (error.status === 404 || error.status === 500) {
                     this.messageService.add({severity: 'error', summary: 'Error',
