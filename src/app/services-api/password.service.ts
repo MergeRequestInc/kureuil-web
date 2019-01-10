@@ -18,7 +18,7 @@ export class PasswordService {
    * @param newPassword: new password for the connected user
    */
   changePassword(newPassword: string): Observable<any> {
-    return this.http.post(SERVER_API_URL + 'api/account/change-password', newPassword);
+    return this.http.post(SERVER_API_URL + 'account/change-password', newPassword);
   }
 
   /**
@@ -26,6 +26,6 @@ export class PasswordService {
    * @param email: email linked to the user trying to recover a password
    */
   resetPassword(email: string): Observable<any> {
-    return this.http.post(SERVER_API_URL + 'api/account/reset-password/init', email);
+    return this.http.post(SERVER_API_URL + 'account/reset-password/init', email);
   }
 }

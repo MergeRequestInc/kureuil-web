@@ -19,15 +19,7 @@ export class AuthenticationService {
    */
   login(email: string, password: string): Observable<any> {
     const data = {email: email, password: password};
-    return this.http.post(SERVER_API_URL + 'user/login', data, {observe: 'response'}).pipe(map(authenticateSuccess.bind(this)));
-
-    function authenticateSuccess(resp) {
-      const bearerToken = resp.headers.get('Authorization');
-      if (bearerToken && bearerToken.slice(0, 7) === 'Bearer ') {
-        const jwt = bearerToken.slice(7, bearerToken.length);
-        return jwt;
-      }
-    }
+    return this.http.post(SERVER_API_URL + 'user/login', data, {responseType: 'text'});
   }
 
   /**
