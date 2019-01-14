@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {SERVER_API_URL} from '../services-common/constants/app.constants';
-import {map} from 'rxjs/operators';
 
 /**
  * Authentication service

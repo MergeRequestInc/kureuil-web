@@ -1,8 +1,9 @@
 {
-  "application.title": "KUREUIL",
+  "application.title": "K.U.R.E.U.I.L.",
   "home": "Home",
-  "welcome.message": "Welcome in KUREUIL",
+  "welcome.message": "Welcome to K.U.R.E.U.I.L. application !",
   "login": "Login",
+  "registration": "Registration",
 
   "buttons": {
     "add": "Add",
@@ -11,9 +12,22 @@
     "submit": "Submit",
     "validate": "Validate",
     "cancel": "Cancel",
-    "login": "Login",
+    "login": "Log in",
     "signup": "Sign up",
+    "register": "Register",
+    "logout": "Log out",
     "remove": "Remove"
+  },
+
+  "user": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "form": {
+      "name": "Your name",
+      "email": "Your email",
+      "password": "Your password"
+    }
   },
 
   "channel": {

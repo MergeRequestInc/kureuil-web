@@ -11,7 +11,6 @@ export class NavbarComponent implements OnInit {
   returnURL: string;
   isLoggedIn: Boolean = localStorage.getItem('isLoggedIn') != null;
   isAdmin: Boolean = localStorage.getItem('isAdmin') != null;
-  idUserConnected = localStorage.getItem('idUserConnected');
 
   constructor(
     private route: ActivatedRoute
