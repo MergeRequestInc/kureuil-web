@@ -11,11 +11,12 @@ export class AppComponent implements OnInit {
   /**
    * Application title
    */
-  title = 'KUREUIL';
+  title;
 
   constructor(private translate: TranslateService) {}
 
   ngOnInit() {
     this.translate.setDefaultLang('en');
+    this.translate.get('application.title').subscribe((result) => this.title = result);
   }
 }
