@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
@@ -28,6 +28,7 @@ import {MenuModule} from 'primeng/menu';
 import {ButtonModule} from 'primeng/button';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { OptionsMenuComponent } from './options-menu/options-menu.component';
+import { NewChannelComponent } from './modals/new-channel/new-channel.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -44,7 +45,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ForgottenPwdComponent,
     ChangePwdComponent,
     LeftMenuComponent,
-    OptionsMenuComponent
+    OptionsMenuComponent,
+    NewChannelComponent
   ],
   imports: [
     NgbModule,
@@ -68,10 +70,13 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
+  entryComponents: [NewChannelComponent],
   providers: [
     AuthenticationService,
     HttpClient,
     UserService,
+    NgbModalConfig,
+    NgbModal,
     MessageService,
     {
       provide: HTTP_INTERCEPTORS,
