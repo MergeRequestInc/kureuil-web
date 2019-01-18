@@ -4,20 +4,20 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="modal-body">
-  <form (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
-    <div class="form-group">
-      <div class="input-group">
-        <input id="channelName" class="form-control" placeholder="Channel's name" name="channelName" [(ngModel)]="channelCopy.name" #channelName="ngModel" required/>
-      </div>
+<form (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
+  <div class="modal-body">
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+      <label for="channelName"></label>
+      <input type="text" name="channelName" class="form-control" placeholder="Channel's name" name="channelName" [(ngModel)]="channelCopy.name" #channelName="ngModel" required/>
+      <div *ngIf="f.submitted && !channelName.valid" class="help-block">Name is required</div>
     </div>
-    <div class="form-group">
-      <div class="input-group">
-        <input id="channelQuery" class="form-control" placeholder="Channel's query" name="channelQuery" [(ngModel)]="channelCopy.query" #channelQuery="ngModel" required/>
-      </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+      <label for="channelQuery"></label>
+      <input type="text" name="channelQuery" class="form-control" placeholder="Channel's query" name="channelQuery" [(ngModel)]="channelCopy.query" #channelQuery="ngModel" required/>
+      <div *ngIf="f.submitted && !channelQuery.valid" class="help-block">Query is required</div>
     </div>
-  </form>
-</div>
-<div class="modal-footer">
-  <button type="submit" class="btn btn-outline-dark">Save</button>
-</div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-dark">Save</button>
+  </div>
+</form>

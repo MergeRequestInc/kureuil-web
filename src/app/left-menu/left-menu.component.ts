@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NewChannelComponent} from '../modals/new-channel/new-channel.component';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Channel} from '../model/channel';
+import {ChannelService} from '../services-api/channel.service';
 
 @Component({
   selector: 'app-left-menu',
@@ -9,32 +10,50 @@ import {Channel} from '../model/channel';
   styleUrls: ['./left-menu.component.css']
 })
 export class LeftMenuComponent implements OnInit {
-  closeResult: string;
 
-  constructor(private modalService: NgbModal) { }
+  channels: Channel[];
+  channelsCopy: Channel[];
 
-  createChannel(){
+  constructor(
+    private channelService: ChannelService,
+    private modalService: NgbModal
+  ) { }
+
+  ngOnInit() {
+    //this.loadAllChannels();
+  }
+
+  createChannel() {
     const modalRef = this.modalService.open(NewChannelComponent);
     modalRef.componentInstance.channel = new Channel();
     modalRef.result.then((result) => {
-      //this.loadAllChannels();
+      console.log(result);
+      this.channels.push(result);
     }, (reason) => {
       console.log('Dismissed : ' + reason);
     });
     console.log(modalRef);
   }
 
-  /*private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
-  }*/
-
-  ngOnInit() {
+  editChannel(channel: Channel) {
+    const modalRef = this.modalService.open(NewChannelComponent);
+    modalRef.componentInstance.channel = channel;
+    modalRef.result.then( (result) => {
+      console.log(result);
+      this.loadAllChannels();
+    }, (reason) => {
+      console.log('Dismissed : ' + reason);
+    });
   }
 
+  deleteChannel(channel: Channel) {
+    this.channelService.delete(channel.id).subscribe( () => this.loadAllChannels());
+  }
+
+  loadAllChannels() {
+    this.channelService.findAll().subscribe( channels => {
+      this.channels = channels;
+      this.channelsCopy = channels;
+    });
+  }
 }
