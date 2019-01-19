@@ -29,6 +29,7 @@ import {ButtonModule} from 'primeng/button';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { OptionsMenuComponent } from './options-menu/options-menu.component';
 import { NewChannelComponent } from './modals/new-channel/new-channel.component';
+import {VirtualScrollerModule} from 'primeng/virtualscroller';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -62,6 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ToastModule,
     MenuModule,
     ButtonModule,
+    VirtualScrollerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
