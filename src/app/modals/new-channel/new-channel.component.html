@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">New Channel</h4>
+  <button type="button" class="close" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
+  <div class="modal-body">
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+      <input type="text" name="channelName" class="form-control" placeholder="Channel's name" name="channelName" [(ngModel)]="channelCopy.name" #channelName="ngModel" required/>
+      <div *ngIf="f.submitted && !channelName.valid" class="help-block">Name is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+      <input type="text" name="channelQuery" class="form-control" placeholder="Channel's query" name="channelQuery" [(ngModel)]="channelCopy.query" #channelQuery="ngModel" required/>
+      <div *ngIf="f.submitted && !channelQuery.valid" class="help-block">Query is required</div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-outline-dark">Save</button>
+  </div>
+</form>
