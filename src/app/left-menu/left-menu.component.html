@@ -1,6 +1,28 @@
 <div class="ui-g">
-  <div class="ui-g-3">
-    <button class="btn btn-lg btn-outline-primary" (click)="createChannel()">
+  <div class="ui-g-12">
+    <p-virtualScroller [value]="channels" scrollHeight="500px" [itemSize]="50">
+      <p-header>
+        <div class="ui-g">
+          <div class="ui-g-12 title-container">
+            List of channels
+          </div>
+        </div>
+      </p-header>
+      <ng-template pTemplate="item" let-channel let-i="index">
+        <div class="ui-g channel-item">
+          <div class="ui-g-12 channel-name">
+            <div class="ui-g-10">{{channel.name}}</div>
+            <div class="ui-g-2">
+              <button type="button" class="actions btn btn-primary" pButton icon="pi pi-pencil"
+                      (click)="editChannel(channel)"></button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-virtualScroller>
+  </div>
+  <div class="ui-g-12">
+    <button class="btn btn-lg btn-secondary" (click)="createChannel()">
       <span class="glyphicon glyphicon-plus" aria-hidden="true">+</span>
     </button>
   </div>
