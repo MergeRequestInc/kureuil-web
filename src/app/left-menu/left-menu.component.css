@@ -10,6 +10,10 @@
   font-weight: bold;
 }
 
+.channel-name {
+  font-size: 18px
+}
+
 .title-container {
   padding: 1em;
 }

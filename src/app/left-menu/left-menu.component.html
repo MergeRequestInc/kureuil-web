@@ -1,6 +1,6 @@
 <div class="ui-g">
   <div class="ui-g-12">
-    <p-virtualScroller [value]="channels" scrollHeight="500px" [itemSize]="40">
+    <p-virtualScroller [value]="channels" scrollHeight="500px" [itemSize]="50">
       <p-header>
         <div class="ui-g">
           <div class="ui-g-12 title-container">
@@ -10,7 +10,13 @@
       </p-header>
       <ng-template pTemplate="item" let-channel let-i="index">
         <div class="ui-g channel-item">
-          <div class="channel-name">{{channel.name}}</div>
+          <div class="ui-g-12 channel-name">
+            <div class="ui-g-10">{{channel.name}}</div>
+            <div class="ui-g-2">
+              <button type="button" class="actions btn btn-primary" pButton icon="pi pi-pencil"
+                      (click)="editChannel(channel)"></button>
+            </div>
+          </div>
         </div>
       </ng-template>
     </p-virtualScroller>
