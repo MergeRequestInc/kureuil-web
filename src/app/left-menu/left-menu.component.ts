@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {NewChannelComponent} from '../modals/new-channel/new-channel.component';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit} from '@angular/core';
+import {ManageChannelComponent} from '../modals/manage-channel/manage-channel.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Channel} from '../model/channel';
 import {ChannelService} from '../services-api/channel.service';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-left-menu',
@@ -16,6 +17,7 @@ export class LeftMenuComponent implements OnInit {
 
   constructor(
     private channelService: ChannelService,
+    private messageService: MessageService,
     private modalService: NgbModal
   ) { }
 
@@ -44,7 +46,7 @@ export class LeftMenuComponent implements OnInit {
   }
 
   createChannel() {
-    const modalRef = this.modalService.open(NewChannelComponent);
+    const modalRef = this.modalService.open(ManageChannelComponent);
     modalRef.componentInstance.channel = new Channel();
     modalRef.result.then((result) => {
       console.log(result);
@@ -56,7 +58,8 @@ export class LeftMenuComponent implements OnInit {
   }
 
   editChannel(channel: Channel) {
-    const modalRef = this.modalService.open(NewChannelComponent);
+    const modalRef = this.modalService.open(ManageChannelComponent);
+    console.log(channel);
     modalRef.componentInstance.channel = channel;
     modalRef.result.then( (result) => {
       console.log(result);
@@ -67,7 +70,18 @@ export class LeftMenuComponent implements OnInit {
   }
 
   deleteChannel(channel: Channel) {
-    this.channelService.delete(channel.id).subscribe( () => this.loadAllChannels());
+    this.channelService.delete(channel.id).subscribe( () => {
+      this.messageService.add({
+        severity: 'success', summary: 'Success',
+        detail: 'Channel deleted.'
+      });
+      this.loadAllChannels();
+    }, () => {
+      this.messageService.add({
+        severity: 'error', summary: 'Error',
+        detail: 'An Error occured. Please contact an administrator.'
+      });
+    });
   }
 
   loadAllChannels() {
@@ -75,5 +89,9 @@ export class LeftMenuComponent implements OnInit {
       this.channels = channels;
       this.channelsCopy = channels;
     });
+  }
+
+  loadLinks(channel) {
+    console.log(channel);
   }
 }
