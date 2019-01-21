@@ -85,7 +85,7 @@ export class LeftMenuComponent implements OnInit {
   }
 
   loadAllChannels() {
-    this.channelService.findAll().subscribe( channels => {
+    this.channelService.loadChannelsByUser().subscribe( channels => {
       this.channels = channels;
       this.channelsCopy = channels;
     });
