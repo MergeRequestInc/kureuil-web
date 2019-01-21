@@ -6,6 +6,7 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {FormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MessageService} from 'primeng/api';
+import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 describe('ForgottenPwdComponent', () => {
   let component: ForgottenPwdComponent;
@@ -14,8 +15,8 @@ describe('ForgottenPwdComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ForgottenPwdComponent ],
-      imports: [HttpClientTestingModule, FormsModule, RouterTestingModule],
-      providers: [MessageService],
+      imports: [HttpClientTestingModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
+      providers: [MessageService, TranslateService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
     .compileComponents();
