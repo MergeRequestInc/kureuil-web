@@ -11,10 +11,14 @@
       <ng-template pTemplate="item" let-channel let-i="index">
         <div class="ui-g channel-item">
           <div class="ui-g-12 channel-name">
-            <div class="ui-g-10">{{channel.name}}</div>
-            <div class="ui-g-2">
-              <button type="button" class="actions btn btn-primary" pButton icon="pi pi-pencil"
+            <div class="ui-g-8">
+              <button class="btn border-secondary" (click)="loadLinks(channel)">{{channel.name}}</button>
+            </div>
+            <div class="ui-g-4">
+              <button type="button" class="btn btn-primary" pButton icon="pi pi-pencil"
                       (click)="editChannel(channel)"></button>
+              <button type="button" class="ui-button-danger" pButton icon="pi pi-cross"
+                      (click)="deleteChannel(channel)"></button>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {NewChannelComponent} from '../modals/new-channel/new-channel.component';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit} from '@angular/core';
+import {ManageChannelComponent} from '../modals/manage-channel/manage-channel.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Channel} from '../model/channel';
 import {ChannelService} from '../services-api/channel.service';
 
@@ -44,7 +44,7 @@ export class LeftMenuComponent implements OnInit {
   }
 
   createChannel() {
-    const modalRef = this.modalService.open(NewChannelComponent);
+    const modalRef = this.modalService.open(ManageChannelComponent);
     modalRef.componentInstance.channel = new Channel();
     modalRef.result.then((result) => {
       console.log(result);
@@ -56,7 +56,8 @@ export class LeftMenuComponent implements OnInit {
   }
 
   editChannel(channel: Channel) {
-    const modalRef = this.modalService.open(NewChannelComponent);
+    const modalRef = this.modalService.open(ManageChannelComponent);
+    console.log(channel);
     modalRef.componentInstance.channel = channel;
     modalRef.result.then( (result) => {
       console.log(result);
@@ -75,5 +76,9 @@ export class LeftMenuComponent implements OnInit {
       this.channels = channels;
       this.channelsCopy = channels;
     });
+  }
+
+  loadLinks(channel) {
+    console.log(channel);
   }
 }

@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {Component, OnInit} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Channel} from '../../model/channel';
 import {isUndefined} from 'util';
 import {ChannelService} from '../../services-api/channel.service';
 
 @Component({
   selector: 'app-new-channel',
-  templateUrl: './new-channel.component.html',
-  styleUrls: ['./new-channel.component.css']
+  templateUrl: './manage-channel.component.html',
+  styleUrls: ['./manage-channel.component.css']
 })
-export class NewChannelComponent implements OnInit {
+export class ManageChannelComponent implements OnInit {
 
   title: string;
   channel: Channel;
@@ -49,9 +49,9 @@ export class NewChannelComponent implements OnInit {
 
   defineTitle() {
     if (isUndefined(this.channel.id)) {
-      this.title = 'New Channel';
+      this.title = 'Channel creation';
     } else {
-      this.title = 'Channel Update';
+      this.title = 'Channel modification';
     }
   }
 
