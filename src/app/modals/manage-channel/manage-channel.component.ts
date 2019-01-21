@@ -48,7 +48,7 @@ export class ManageChannelComponent implements OnInit {
   }
 
   defineTitle() {
-    if (isUndefined(this.channel.id)) {
+    if (isUndefined(this.channel) || isUndefined(this.channel.id)) {
       this.title = 'Channel creation';
     } else {
       this.title = 'Channel modification';
