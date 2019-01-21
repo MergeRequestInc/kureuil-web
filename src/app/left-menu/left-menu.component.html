@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="ui-g">
   <div class="ui-g-12">
     <p-virtualScroller [value]="channels" scrollHeight="500px" [itemSize]="50">
@@ -17,7 +18,7 @@
             <div class="ui-g-4">
               <button type="button" class="btn btn-primary" pButton icon="pi pi-pencil"
                       (click)="editChannel(channel)"></button>
-              <button type="button" class="ui-button-danger" pButton icon="pi pi-cross"
+              <button type="button" class="ui-button-danger" pButton icon="pi pi-times"
                       (click)="deleteChannel(channel)"></button>
             </div>
           </div>

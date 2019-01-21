@@ -3,6 +3,7 @@ import {ManageChannelComponent} from '../modals/manage-channel/manage-channel.co
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Channel} from '../model/channel';
 import {ChannelService} from '../services-api/channel.service';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-left-menu',
@@ -16,6 +17,7 @@ export class LeftMenuComponent implements OnInit {
 
   constructor(
     private channelService: ChannelService,
+    private messageService: MessageService,
     private modalService: NgbModal
   ) { }
 
@@ -68,7 +70,18 @@ export class LeftMenuComponent implements OnInit {
   }
 
   deleteChannel(channel: Channel) {
-    this.channelService.delete(channel.id).subscribe( () => this.loadAllChannels());
+    this.channelService.delete(channel.id).subscribe( () => {
+      this.messageService.add({
+        severity: 'success', summary: 'Success',
+        detail: 'Channel deleted.'
+      });
+      this.loadAllChannels();
+    }, () => {
+      this.messageService.add({
+        severity: 'error', summary: 'Error',
+        detail: 'An Error occured. Please contact an administrator.'
+      });
+    });
   }
 
   loadAllChannels() {
