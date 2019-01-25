@@ -19,7 +19,7 @@ export class ChannelService {
   }
 
   update (channel: Channel) {
-    return this.http.post(SERVER_API_URL + 'channels', channel);
+    return this.http.put(SERVER_API_URL + 'channels', channel);
   }
 
 

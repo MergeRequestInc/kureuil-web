@@ -16,6 +16,9 @@
     "login": "Log in",
     "signup": "Sign up",
     "register": "Register",
+    "newLink": "Add link",
+    "delLink": "Delete link",
+    "upLink": "Edit link",
     "logout": "Log out",
     "remove": "Remove"
   },

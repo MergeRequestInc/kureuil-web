@@ -30,6 +30,8 @@ import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { OptionsMenuComponent } from './options-menu/options-menu.component';
 import { NewChannelComponent } from './modals/new-channel/new-channel.component';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import { AddLinkComponent } from './add-link/add-link.component';
+import { LinksListComponent } from './links-list/links-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -47,7 +49,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ChangePwdComponent,
     LeftMenuComponent,
     OptionsMenuComponent,
-    NewChannelComponent
+    NewChannelComponent,
+    AddLinkComponent,
+    LinksListComponent
   ],
   imports: [
     NgbModule,

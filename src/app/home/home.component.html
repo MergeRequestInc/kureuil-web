@@ -1,5 +1,13 @@
 <app-left-menu class="ui-g-3 bg-dark"></app-left-menu>
 <div class="ui-g-9">
-  <app-options-menu class="ui-g-offset-10 ui-g-1"></app-options-menu>
-  <div class="ui-g-12" style="background-color: red">Content</div>
+  <button type="button" (click)="newLink()" class="btn btn-primary">{{'buttons.newLink' | translate}}</button>
+  <div *ngFor="let link of links" class="ui-g-9">
+      <app-links-list
+        [link] = "link">
+      </app-links-list>
+      <div class="ui-g-3 btn-group" role="group">
+        <button type="button" class="btn btn-primary btn-group" (click)="updateLink(link.id)">{{'buttons.upLink' | translate}}</button>
+        <button type="button" class="btn btn-danger btn-group" (click)="deleteLink(link)">{{'buttons.delLink' | translate}}</button>
+      </div>
+  </div>
 </div>
