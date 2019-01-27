@@ -65,7 +65,7 @@ export class AddLinkComponent implements OnInit {
   }
 
   defineTitle() {
-    if (isNullOrUndefined(this.link.id)) {
+    if (isNullOrUndefined(this.link) || isNullOrUndefined(this.link.id)) {
       this.title = 'New link';
     } else {
       this.title = 'Link update';

@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddLinkComponent } from './add-link.component';
+import {FormsModule} from '@angular/forms';
+import {RouterTestingModule} from '@angular/router/testing';
+import {MessageService} from 'primeng/api';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 
 describe('AddLinkComponent', () => {
   let component: AddLinkComponent;
@@ -8,7 +12,9 @@ describe('AddLinkComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddLinkComponent ]
+      declarations: [ AddLinkComponent ],
+      imports: [FormsModule, RouterTestingModule, HttpClientTestingModule],
+      providers: [MessageService]
     })
     .compileComponents();
   }));
