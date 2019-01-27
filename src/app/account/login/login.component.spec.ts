@@ -7,6 +7,7 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {AuthenticationService} from '../../services-api/authentication.service';
 import {MessageService} from 'primeng/api';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -15,7 +16,7 @@ describe('LoginComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
-      imports: [FormsModule, RouterTestingModule, HttpClientTestingModule, RouterTestingModule],
+      imports: [FormsModule, RouterTestingModule, HttpClientTestingModule, RouterTestingModule, TranslateModule.forRoot()],
       providers: [AuthenticationService, MessageService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })

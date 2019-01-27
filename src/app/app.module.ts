@@ -28,7 +28,7 @@ import {MenuModule} from 'primeng/menu';
 import {ButtonModule} from 'primeng/button';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { OptionsMenuComponent } from './options-menu/options-menu.component';
-import { NewChannelComponent } from './modals/new-channel/new-channel.component';
+import { ManageChannelComponent } from './modals/manage-channel/manage-channel.component';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import { AddLinkComponent } from './add-link/add-link.component';
 import { LinksListComponent } from './links-list/links-list.component';
@@ -49,7 +49,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ChangePwdComponent,
     LeftMenuComponent,
     OptionsMenuComponent,
-    NewChannelComponent,
+    ManageChannelComponent,
     AddLinkComponent,
     LinksListComponent
   ],
@@ -76,7 +76,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
-  entryComponents: [NewChannelComponent],
+  entryComponents: [ManageChannelComponent],
   providers: [
     AuthenticationService,
     HttpClient,

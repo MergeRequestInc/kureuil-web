@@ -6,10 +6,11 @@ import {LoginComponent} from '../account/login/login.component';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('AuthenticationService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule, FormsModule, RouterTestingModule],
+    imports: [HttpClientTestingModule, FormsModule, RouterTestingModule, TranslateModule.forRoot()],
     declarations: [LoginComponent],
     providers: [AuthenticationService],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
