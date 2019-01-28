@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ManageChannelComponent} from '../modals/manage-channel/manage-channel.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Channel} from '../model/channel';
 import {ChannelService} from '../services-api/channel.service';
 import {MessageService} from 'primeng/api';
 
+/**
+ * Component which displays the user's channels
+ */
 @Component({
   selector: 'app-left-menu',
   templateUrl: './left-menu.component.html',
@@ -12,9 +15,14 @@ import {MessageService} from 'primeng/api';
 })
 export class LeftMenuComponent implements OnInit {
 
+  /** List of user's channels */
   channels: Channel[];
+  /** Copy of the user's channels */
   channelsCopy: Channel[];
+  /** Channel clicked */
+  @Output() channelClicked: EventEmitter<Channel> = new EventEmitter<Channel>();
 
+  /** Constructor */
   constructor(
     private channelService: ChannelService,
     private messageService: MessageService,
@@ -41,10 +49,16 @@ export class LeftMenuComponent implements OnInit {
       new Channel(16, 'channel 16', 'query 3'),
       new Channel(17, 'channel 17', 'query 3')
     ];
+
+    // Emit the channel which for we have to retrieve links
+    this.loadLinks(this.channels[0]);
     console.log(this.channels);
-    // this.loadAllChannels();
+    // this.loadAllChannels(); TODO : real function
   }
 
+  /**
+   * Open the modal to create a channel
+   */
   createChannel() {
     const modalRef = this.modalService.open(ManageChannelComponent);
     modalRef.componentInstance.channel = new Channel();
@@ -57,6 +71,10 @@ export class LeftMenuComponent implements OnInit {
     console.log(modalRef);
   }
 
+  /**
+   * Open the modal to edit a channel
+   * @param channel : channel to edit
+   */
   editChannel(channel: Channel) {
     const modalRef = this.modalService.open(ManageChannelComponent);
     console.log(channel);
@@ -69,6 +87,10 @@ export class LeftMenuComponent implements OnInit {
     });
   }
 
+  /**
+   * Delete a channel
+   * @param channel : channel to delete
+   */
   deleteChannel(channel: Channel) {
     this.channelService.delete(channel.id).subscribe( () => {
       this.messageService.add({
@@ -84,6 +106,9 @@ export class LeftMenuComponent implements OnInit {
     });
   }
 
+  /**
+   * Load all the connected user's channels
+   */
   loadAllChannels() {
     this.channelService.loadChannelsByUser().subscribe( channels => {
       this.channels = channels;
@@ -91,7 +116,11 @@ export class LeftMenuComponent implements OnInit {
     });
   }
 
+  /**
+   * Emit the channel id in order to load links linked to the channel
+   * @param channel : channel which links we have to retrieve
+   */
   loadLinks(channel) {
-    console.log(channel);
+    this.channelClicked.emit(channel);
   }
 }
