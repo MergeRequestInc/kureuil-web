@@ -16,7 +16,7 @@ export class TagService {
   }
 
   getByLinkId(linkId: number) {
-    return this.http.get<Tag[]>( SERVER_API_URL + 'tags' + linkId);
+    return this.http.get<Tag[]>( SERVER_API_URL + 'tags/' + linkId);
   }
 
   getAllTags() {
