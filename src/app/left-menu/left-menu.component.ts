@@ -4,6 +4,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Channel} from '../model/channel';
 import {ChannelService} from '../services-api/channel.service';
 import {MessageService} from 'primeng/api';
+import {isUndefined} from 'util';
 
 /**
  * Component which displays the user's channels
@@ -31,7 +32,9 @@ export class LeftMenuComponent implements OnInit {
 
   ngOnInit() {
     // Emit the channel which for we have to retrieve links
-    this.loadLinks(this.channels[0]);
+    if (!isUndefined(this.channels) && this.channels.length > 0) {
+      this.loadLinks(this.channels[0]);
+    }
     console.log(this.channels);
     this.loadAllChannels();
   }
