@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalConfig, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
@@ -24,6 +24,14 @@ import {AuthInterceptor} from './services-common/interceptor/auth.interceptor';
 import {TagsUrlComponent} from './ia/tags-url/tags-url.component';
 import {ForgottenPwdComponent} from './account/forgotten-pwd/forgotten-pwd.component';
 import {ChangePwdComponent} from './account/change-pwd/change-pwd.component';
+import {MenuModule} from 'primeng/menu';
+import {ButtonModule} from 'primeng/button';
+import { LeftMenuComponent } from './left-menu/left-menu.component';
+import { OptionsMenuComponent } from './options-menu/options-menu.component';
+import { ManageChannelComponent } from './modals/manage-channel/manage-channel.component';
+import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import { AddLinkComponent } from './add-link/add-link.component';
+import { LinksListComponent } from './links-list/links-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -38,7 +46,12 @@ export function HttpLoaderFactory(http: HttpClient) {
     NavbarComponent,
     TagsUrlComponent,
     ForgottenPwdComponent,
-    ChangePwdComponent
+    ChangePwdComponent,
+    LeftMenuComponent,
+    OptionsMenuComponent,
+    ManageChannelComponent,
+    AddLinkComponent,
+    LinksListComponent
   ],
   imports: [
     NgbModule,
@@ -52,6 +65,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     HttpClientModule,
     ToastModule,
+    MenuModule,
+    ButtonModule,
+    VirtualScrollerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -60,10 +76,13 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
   ],
+  entryComponents: [ManageChannelComponent],
   providers: [
     AuthenticationService,
     HttpClient,
     UserService,
+    NgbModalConfig,
+    NgbModal,
     MessageService,
     {
       provide: HTTP_INTERCEPTORS,

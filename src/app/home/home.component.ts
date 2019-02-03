@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {LinkService} from '../services-api/link.service';
+import {Link} from '../model/link';
+import {Channel} from '../model/channel';
 
 /**
  * Home component
@@ -12,14 +15,73 @@ import {ActivatedRoute} from '@angular/router';
 export class HomeComponent implements OnInit {
 
   returnUrl: string;
+  query: string;
   isLoggedIn: Boolean = localStorage.getItem('isLoggedIn') != null;
+  links: Link[];
+  channelTitle: string;
+  selectedChannel: Channel;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    private linkService: LinkService
   ) { }
 
-    ngOnInit() {
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    }
+  ngOnInit() {
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+    // TODO load links of the first channel
+
+  }
+
+  /**
+   * Redirect to the link creation page
+   */
+  newLink() {
+    this.router.navigate(['/newLink']);
+  }
+
+  /**
+   * Update the query saved in the component and reload the assoaciated links
+   * @param query : query to consider
+   */
+  loadQuery(query: string) {
+    this.query = query;
+    this.loadLinks();
+  }
+
+  /**
+   * Load the links linked to a query
+   */
+  loadLinks() {
+    this.linkService.getByQuery(this.query).subscribe( links => this.links = links);
+  }
+
+  /**
+   * Update a link
+   * @param linkId : link's id to update
+   */
+  updateLink(linkId) {
+    this.router.navigate(['/editLink', linkId]);
+  }
+
+  /**
+   * Delete a link
+   * @param link : link to delete
+   */
+  deleteLink(link: Link) {
+    this.linkService.delete(link.id).subscribe(() => this.loadLinks());
+  }
+
+  /**
+   * Load Links linked to the channel clicked in left menu
+   * @param channelClicked : channel clicked
+   */
+  loadLinksLinkedToChannel(channelClicked: Channel) {
+    console.log('loadLinks');
+    this.channelTitle = channelClicked.name;
+    this.selectedChannel = channelClicked;
+    this.loadQuery(channelClicked.query);
+  }
 }

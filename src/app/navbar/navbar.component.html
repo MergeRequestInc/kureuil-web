@@ -1,10 +1,11 @@
-<nav class="navbar navbar-dark bg-dark mb-5">
+<nav class="navbar navbar-dark bg-dark">
   <a *ngIf="!isLoggedIn" class="navbar-brand" routerLink="/login">{{ 'home' | translate}}</a>
   <a *ngIf="isLoggedIn" class="navbar-brand" routerLink="/">{{ 'home' | translate}}</a>
   <div class="navbar-expand mr-auto">
     <div class="navbar-nav">
       <a *ngIf="!isLoggedIn" class="nav-item nav-link" routerLink="/login">{{'buttons.login' | translate}}</a>
       <a *ngIf="!isLoggedIn" class="nav-item nav-link" routerLink="/register">{{'buttons.register' | translate}}</a>
+      <a *ngIf="isLoggedIn" class="nav-item nav-link" routerLink="/newPwd">{{'buttons.chPwd' | translate}}</a>
       <a *ngIf="isLoggedIn" class="nav-item nav-link" (click)="logout()" style="cursor: pointer">{{'buttons.logout' | translate}}</a>
     </div>
   </div>

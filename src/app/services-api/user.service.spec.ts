@@ -2,13 +2,14 @@ import {TestBed} from '@angular/core/testing';
 
 import {UserService} from './user.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {User} from '../model/user';
 import {HttpRequest} from '@angular/common/http';
 import {SERVER_API_URL} from '../services-common/constants/app.constants';
+import {UserFixture} from '../services-common/test/fixtures/userFixture';
 
 describe('UserService', () => {
-    const expectedUser01 = new User(1, 'login', 'mail', 'password');
-    const expectedUser02 = new User(2, 'login2', 'mail2', 'password2');
+    /** data for tests */
+    const expectedUser01 = UserFixture.user01;
+    const expectedUser02 = UserFixture.user02;
     const expectedUsers = [expectedUser01, expectedUser02];
 
     let backend: HttpTestingController;
@@ -29,10 +30,13 @@ describe('UserService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should call GET method return all users', () => {
+    it('should call GET method return all users', (done) => {
         let actualDataAll = {};
 
-        service.getAll().subscribe(data => actualDataAll = data);
+        service.getAll().subscribe(data => {
+          actualDataAll = data;
+          done();
+        });
 
         backend.expectOne((req: HttpRequest<any>) => {
             return req.url === (SERVER_API_URL + 'users') && req.method === 'GET';
@@ -41,10 +45,13 @@ describe('UserService', () => {
         expect(actualDataAll).toEqual(expectedUsers);
     });
 
-    it('should call GET method return one user by id', () => {
+    it('should call GET method return one user by id', (done) => {
         let actualData = {};
 
-        service.getById(1).subscribe(data => actualData = data);
+        service.getById(1).subscribe(data => {
+          actualData = data;
+          done();
+        });
 
         backend.expectOne((req: HttpRequest<any>) => {
             return req.url === (SERVER_API_URL + 'users/1') && req.method === 'GET';
@@ -53,11 +60,14 @@ describe('UserService', () => {
         expect(actualData).toEqual(expectedUser01);
     });
 
-    it('should call PUT method (update a user) and return the result', () => {
+    it('should call PUT method (update a user) and return the result', (done) => {
         let actualData = {};
         expectedUser01.email = 'test';
 
-        service.update(expectedUser01).subscribe(data => actualData = data);
+        service.update(expectedUser01).subscribe(data => {
+          actualData = data;
+          done();
+        });
 
         backend.expectOne((req: HttpRequest<any>) => {
             return req.url === (SERVER_API_URL + 'users') && req.method === 'PUT';
@@ -66,11 +76,14 @@ describe('UserService', () => {
         expect(actualData).toEqual(expectedUser01);
     });
 
-    it('should call POST method (create user) and return the result', () => {
+    it('should call POST method (create user) and return the result', (done) => {
         let actualData = {};
         expectedUser01.id = undefined;
 
-        service.create(expectedUser01).subscribe(data => actualData = data);
+        service.create(expectedUser01).subscribe(data => {
+          actualData = data;
+          done();
+        });
 
         backend.expectOne((req: HttpRequest<any>) => {
             return req.url === (SERVER_API_URL + 'users') && req.method === 'POST';

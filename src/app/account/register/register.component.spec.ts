@@ -6,6 +6,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {MessageService} from 'primeng/api';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -14,7 +15,7 @@ describe('RegisterComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ RegisterComponent ],
-      imports: [FormsModule, RouterTestingModule, HttpClientTestingModule],
+      imports: [FormsModule, RouterTestingModule, HttpClientTestingModule, TranslateModule.forRoot()],
       providers: [MessageService],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })

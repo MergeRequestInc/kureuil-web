@@ -1,0 +1,34 @@
+<p-toast></p-toast>
+<div class="ui-g">
+  <div class="ui-g-12">
+    <p-virtualScroller [value]="channels" scrollHeight="500px" [itemSize]="50">
+      <p-header>
+        <div class="ui-g">
+          <div class="ui-g-12 title-container">
+            List of channels
+          </div>
+        </div>
+      </p-header>
+      <ng-template pTemplate="item" let-channel let-i="index">
+        <div class="ui-g channel-item">
+          <div class="ui-g-12 channel-name">
+            <div class="ui-g-8">
+              <button class="btn border-secondary" (click)="loadLinks(channel)">{{channel.name}}</button>
+            </div>
+            <div class="ui-g-4 ui-inputgroup">
+              <button type="button" class="ui-button" pButton icon="pi pi-pencil"
+                      (click)="editChannel(channel)"></button>
+              <button type="button" class="ui-button-danger" pButton icon="pi pi-times"
+                      (click)="deleteChannel(channel)"></button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-virtualScroller>
+  </div>
+  <div class="ui-g-12">
+    <button class="btn btn-lg btn-secondary" (click)="createChannel()">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true">+</span>
+    </button>
+  </div>
+</div>
