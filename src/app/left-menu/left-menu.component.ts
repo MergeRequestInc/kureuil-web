@@ -47,7 +47,7 @@ export class LeftMenuComponent implements OnInit {
     modalRef.componentInstance.channel = new Channel();
     modalRef.result.then((result) => {
       console.log(result);
-      this.channels.push(result);
+      this.loadAllChannels();
     }, (reason) => {
       console.log('Dismissed : ' + reason);
     });
