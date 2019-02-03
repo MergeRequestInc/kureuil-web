@@ -25,15 +25,16 @@ export class ManageChannelComponent implements OnInit {
   }
 
   save() {
-    console.log('save');
     this.channel = this.channelCopy;
     if (isUndefined(this.channel.id)) {
+      console.log('save');
       this.channelService.create(this.channel).subscribe( (channel) => {
         this.activeModal.close(channel);
       }, () => {
         console.log('Error: can not create channel');
       });
     } else {
+      console.log('update');
       this.channelService.update(this.channel).subscribe( (channel) => {
         this.activeModal.close(channel);
       }, () => {
