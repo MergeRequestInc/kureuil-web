@@ -1,4 +1,4 @@
-import {BuilderDtoJsonAbstract} from "./builderDtoJsonAbstract";
+import {BuilderDtoJsonAbstract} from './builderDtoJsonAbstract';
 
 export class Tag extends BuilderDtoJsonAbstract {
   constructor(

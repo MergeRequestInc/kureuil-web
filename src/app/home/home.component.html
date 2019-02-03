@@ -2,7 +2,7 @@
 <div class="ui-g-8">
   <button type="button" (click)="newLink()" class="btn btn-primary">{{'buttons.newLink' | translate}}</button>
   <div *ngFor="let link of links" class="ui-g-9">
-      <app-links-list
+      <app-links-list class="ui-g-6"
         [link] = "link">
       </app-links-list>
       <div class="ui-g-3 btn-group" role="group">
