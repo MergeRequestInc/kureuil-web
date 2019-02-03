@@ -27,6 +27,6 @@ export class LinkService {
   }
 
   getByQuery(query: string) {
-    return this.http.get<Link[]>(SERVER_API_URL + 'links/' + query);
+    return this.http.get<Link[]>(SERVER_API_URL + 'links/query/' + query);
   }
 }
