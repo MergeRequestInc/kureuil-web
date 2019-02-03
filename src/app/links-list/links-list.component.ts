@@ -16,14 +16,7 @@ export class LinksListComponent implements OnInit {
   constructor(private tagService: TagService) { }
 
   ngOnInit() {
-    // this.loadTags();
-    this.tags = [
-      new Tag(1, 'tags'),
-      new Tag(2, 'for'),
-      new Tag(3, 'testing'),
-      new Tag(4, 'without'),
-      new Tag(5, 'back'),
-    ];
+    this.loadTags();
   }
   loadTags() {
     this.tagService.getByLinkId(this.link.id).subscribe( tags => this.tags = tags);

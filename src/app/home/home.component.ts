@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   isLoggedIn: Boolean = localStorage.getItem('isLoggedIn') != null;
   links: Link[];
   channelTitle: string;
+  selectedChannel: Channel;
 
   constructor(
     private route: ActivatedRoute,
@@ -80,6 +81,7 @@ export class HomeComponent implements OnInit {
   loadLinksLinkedToChannel(channelClicked: Channel) {
     console.log('loadLinks');
     this.channelTitle = channelClicked.name;
+    this.selectedChannel = channelClicked;
     this.loadQuery(channelClicked.query);
   }
 }
