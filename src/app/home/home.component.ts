@@ -30,12 +30,7 @@ export class HomeComponent implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
     // TODO load links of the first channel
-    this.links = [
-      new Link(1, 'http://www.google.fr'),
-      new Link(2, 'http://www.youtube.fr'),
-      new Link(3, 'http://www.impot.gouv.fr'),
-      new Link(4, 'http://www.angular.io'),
-    ];
+
   }
 
   /**

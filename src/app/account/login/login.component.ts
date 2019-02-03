@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 (response) => {
                     localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('Authorization', response);
+                    localStorage.setItem('Authorization', response.headers.get('Access-Token'));
                     window.location.href = '/';
                 },
                 (error) => {
