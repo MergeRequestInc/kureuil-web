@@ -14,9 +14,9 @@ import {Tag} from '../model/tag';
 export class AddLinkComponent implements OnInit {
 
   private sub: any;
-  linkId: number;
+  linkId = 0;
   link: Link;
-  linkCopy: Link = new Link();
+  linkCopy = new Link();
   title: string;
   loading = false;
 
@@ -30,14 +30,15 @@ export class AddLinkComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.linkId = +params['linkId'];
     });
-    console.log(this.linkId);
     this.defineTitle();
-    if (!isNullOrUndefined(this.linkId)) {
+    if (!isNaN(this.linkId)) {
       this.linkService.getById(this.linkId).subscribe(link => {
-        this.link = link;
+        this.link = link[0];
+        this.linkCopy = Object.assign({}, this.link);
+        console.log(this.linkCopy);
       });
     } else {
-      this.linkCopy = Object.assign(this.linkCopy, this.link);
+      this.linkCopy = Object.assign({}, this.link);
     }
   }
 
@@ -74,10 +75,10 @@ export class AddLinkComponent implements OnInit {
   }
 
   defineTitle() {
-    if (isNullOrUndefined(this.link) || isNullOrUndefined(this.link.id)) {
-      this.title = 'New link';
-    } else {
+    if (!isNaN(this.linkId)) {
       this.title = 'Link update';
+    } else {
+      this.title = 'New link';
     }
   }
 
