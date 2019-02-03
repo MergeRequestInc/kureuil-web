@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Link} from '../model/link';
 import {SERVER_API_URL} from '../services-common/constants/app.constants';
 import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
