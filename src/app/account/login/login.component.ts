@@ -8,28 +8,28 @@ import {MessageService} from 'primeng/api';
  * Component for login
  */
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    model: User = new User();
-    loading = false;
-    returnUrl: string;
+  model: User = new User();
+  loading = false;
+  returnUrl: string;
 
-    constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private authenticationService: AuthenticationService,
-        private messageService: MessageService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private messageService: MessageService) { }
 
-    ngOnInit() {
-        // reset login status
-        this.authenticationService.logout();
+  ngOnInit() {
+    // reset login status
+    this.authenticationService.logout();
 
-        // get return url from route parameters or default to '/'
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    }
+    // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
 
     /**
      * Login
@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 (response) => {
                     localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('Authorization', response.headers.get('Access-Token'));
+                    localStorage.setItem('Authorization', response.body['access-token']);
+                    sessionStorage.setItem('Authorization', response.body['access-token'])
                     window.location.href = '/';
                 },
                 (error) => {
