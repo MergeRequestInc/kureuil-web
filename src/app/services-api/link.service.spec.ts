@@ -30,21 +30,6 @@ describe('LinkService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should call GET method return all links by query', (done) => {
-    let actualDataAll = {};
-
-    serviceMocked.getByQuery('query').subscribe(data => {
-      actualDataAll = data;
-      done();
-    });
-
-    backend.expectOne((req: HttpRequest<any>) => {
-      return req.url === (SERVER_API_URL + 'links/query') && req.method === 'GET';
-    }, `GET all Links linked to a query from ${'api/links'}`)
-      .flush(expectedLinks);
-    expect(actualDataAll).toEqual(expectedLinks);
-  });
-
   it('should call POST method (create link) and return the result', (done) => {
     let actualData = {};
     expectedLink01.id = undefined;
