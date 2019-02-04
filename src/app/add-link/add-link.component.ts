@@ -19,13 +19,14 @@ export class AddLinkComponent implements OnInit {
   linkCopy = new Link();
   title: string;
   loading = false;
-  atLeastOneTag = false;
+  atLeastOneTag: boolean;
   tag1: Tag;
   tag2: Tag;
   tag3: Tag;
   tag4: Tag;
   tag5: Tag;
   tags: Tag[];
+  urlFilled: boolean;
 
   constructor (
     private router: Router,
@@ -34,12 +35,14 @@ export class AddLinkComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.atLeastOneTag = false;
     this.sub = this.route.params.subscribe(params => {
       this.linkId = +params['linkId'];
     });
     this.defineScreenTitle();
     if (!isNaN(this.linkId)) {
       this.linkService.getById(this.linkId).subscribe(link => {
+        this.urlFilled = true;
         this.link = link[0];
         this.linkCopy = Object.assign({}, this.link);
 
@@ -49,8 +52,11 @@ export class AddLinkComponent implements OnInit {
         this.tag4 = (isNullOrUndefined(this.link.tags[3])) ? new Tag() : this.link.tags[3];
         this.tag5 = (isNullOrUndefined(this.link.tags[4])) ? new Tag() : this.link.tags[4];
         this.tags = [this.tag1, this.tag2, this.tag3, this.tag4, this.tag5];
+        this.checkIfAtLeastOneTagsExist();
+        console.log(this.atLeastOneTag);
       });
     } else {
+      this.urlFilled = false;
       this.linkCopy = Object.assign({}, this.link);
       this.tag1 = new Tag();
       this.tag2 = new Tag();
@@ -58,6 +64,7 @@ export class AddLinkComponent implements OnInit {
       this.tag4 = new Tag();
       this.tag5 = new Tag();
       this.tags = [this.tag1, this.tag2, this.tag3, this.tag4, this.tag5];
+      console.log(this.atLeastOneTag);
     }
   }
 
@@ -109,16 +116,15 @@ export class AddLinkComponent implements OnInit {
    * Adjust the tags list
    */
   addTag() {
-    if (this.checkIfAtLeastOneTagsExist()) {
-      this.atLeastOneTag = true;
-    }
+    this.atLeastOneTag = this.checkIfAtLeastOneTagsExist();
+    console.log('add Tag ' + this.atLeastOneTag);
   }
 
   /**
    * Check if at least one tag is filled in the form
    */
   private checkIfAtLeastOneTagsExist() {
-    const filledTags = this.tags.filter(value => value.name !== '');
+    const filledTags = this.tags.filter(value => value.name !== '' && !isNullOrUndefined(value.name));
     return filledTags.length > 0;
   }
 
@@ -133,5 +139,12 @@ export class AddLinkComponent implements OnInit {
       }
     });
     this.tags = this.tags.filter(value => !isNullOrUndefined(value.name));
+  }
+
+  /**
+   * Function called when the user change the URL
+   */
+  changeUrl() {
+    this.urlFilled = !(isNullOrUndefined(this.linkCopy.url) || this.linkCopy.url === '');
   }
 }

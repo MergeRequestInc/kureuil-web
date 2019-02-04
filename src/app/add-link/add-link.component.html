@@ -4,7 +4,8 @@
     <form (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
       <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
         <label for="linkUrl">Link url: </label>
-        <input type="text" name="linkUrl" class="form-control" [(ngModel)]="linkCopy.url" #linkUrl="ngModel" value="{{linkCopy.url}}" required/>
+        <input type="text" name="linkUrl" class="form-control" [(ngModel)]="linkCopy.url"
+               #linkUrl="ngModel" value="{{linkCopy.url}}" (ngModelChange)="changeUrl()"/>
       </div>
 
       <div *ngIf="tag1" class="form-group" [ngClass]="{ 'has-error': f.submitted}">
@@ -34,7 +35,7 @@
                #linkUrl="ngModel" value="{{tag5.name}}"  (ngModelChange)="addTag(tag5)"/>
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-outline-dark" [disabled]="f.form.invalid && !atLeastOneTag">Save</button>
+        <button type="submit" class="btn btn-outline-dark" [disabled]="!urlFilled && !atLeastOneTag">Save</button>
       </div>
     </form>
   </div>
