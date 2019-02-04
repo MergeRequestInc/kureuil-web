@@ -1,33 +1,40 @@
 <div class="col-md-6 col-md-offset-3">
   <h4>{{title}}</h4>
   <div *ngIf="linkCopy">
-    <form (ngSubmit)="f.form.valid && save($event)" #f="ngForm" novalidate>
+    <form (ngSubmit)="f.form.valid && save()" #f="ngForm" novalidate>
       <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
         <label for="linkUrl">Link url: </label>
         <input type="text" name="linkUrl" class="form-control" [(ngModel)]="linkCopy.url" #linkUrl="ngModel" value="{{linkCopy.url}}" required/>
       </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+
+      <div *ngIf="tag1" class="form-group" [ngClass]="{ 'has-error': f.submitted}">
         <label for="tag1">Tag #1:</label>
-        <input type="text" name="tag1" class="from-control" required/>
+        <input type="text" name="tag1" class="from-control" [(ngModel)]="tag1.name"
+               #linkUrl="ngModel" value="{{tag1.name}}"
+               (ngModelChange)="addTag(tag1)"/>
       </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+      <div *ngIf="tag2" class="form-group" [ngClass]="{ 'has-error': f.submitted}">
         <label for="tag2">Tag #2:</label>
-        <input type="text" name="tag2" class="from-control"/>
+        <input type="text" name="tag2" class="from-control" [(ngModel)]="tag2.name"
+               #linkUrl="ngModel" value="{{tag2.name}}"  (ngModelChange)="addTag(tag2)"/>
       </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+      <div *ngIf="tag3" class="form-group" [ngClass]="{ 'has-error': f.submitted}">
         <label for="tag3">Tag #3:</label>
-        <input type="text" name="tag3" class="from-control"/>
+        <input type="text" name="tag3" class="from-control" [(ngModel)]="tag3.name"
+               #linkUrl="ngModel" value="{{tag3.name}}"  (ngModelChange)="addTag(tag3)"/>
       </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+      <div *ngIf="tag4" class="form-group" [ngClass]="{ 'has-error': f.submitted}">
         <label for="tag4">Tag #4:</label>
-        <input type="text" name="tag4" class="from-control"/>
+        <input type="text" name="tag4" class="from-control" [(ngModel)]="tag4.name"
+               #linkUrl="ngModel" value="{{tag4.name}}"  (ngModelChange)="addTag(tag4)"/>
       </div>
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted}">
+      <div *ngIf="tag5" class="form-group" [ngClass]="{ 'has-error': f.submitted}">
         <label for="tag5">Tag #5:</label>
-        <input type="text" name="tag5" class="from-control"/>
+        <input type="text" name="tag5" class="from-control" [(ngModel)]="tag5.name"
+               #linkUrl="ngModel" value="{{tag5.name}}"  (ngModelChange)="addTag(tag5)"/>
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-outline-dark">Save</button>
+        <button type="submit" class="btn btn-outline-dark" [disabled]="f.form.invalid && !atLeastOneTag">Save</button>
       </div>
     </form>
   </div>

@@ -19,6 +19,13 @@ export class AddLinkComponent implements OnInit {
   linkCopy = new Link();
   title: string;
   loading = false;
+  atLeastOneTag = false;
+  tag1: Tag;
+  tag2: Tag;
+  tag3: Tag;
+  tag4: Tag;
+  tag5: Tag;
+  tags: Tag[];
 
   constructor (
     private router: Router,
@@ -30,21 +37,34 @@ export class AddLinkComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.linkId = +params['linkId'];
     });
-    this.defineTitle();
+    this.defineScreenTitle();
     if (!isNaN(this.linkId)) {
       this.linkService.getById(this.linkId).subscribe(link => {
         this.link = link[0];
         this.linkCopy = Object.assign({}, this.link);
-        console.log(this.linkCopy);
+
+        this.tag1 = (isNullOrUndefined(this.link.tags[0])) ? new Tag() : this.link.tags[0];
+        this.tag2 = (isNullOrUndefined(this.link.tags[1])) ? new Tag() : this.link.tags[1];
+        this.tag3 = (isNullOrUndefined(this.link.tags[2])) ? new Tag() : this.link.tags[2];
+        this.tag4 = (isNullOrUndefined(this.link.tags[3])) ? new Tag() : this.link.tags[3];
+        this.tag5 = (isNullOrUndefined(this.link.tags[4])) ? new Tag() : this.link.tags[4];
+        this.tags = [this.tag1, this.tag2, this.tag3, this.tag4, this.tag5];
       });
     } else {
       this.linkCopy = Object.assign({}, this.link);
+      this.tag1 = new Tag();
+      this.tag2 = new Tag();
+      this.tag3 = new Tag();
+      this.tag4 = new Tag();
+      this.tag5 = new Tag();
+      this.tags = [this.tag1, this.tag2, this.tag3, this.tag4, this.tag5];
     }
   }
 
-  save(form: any) {
+  save() {
     this.loading = true;
-    this.associateTags(form);
+    this.fillFieldsTags();
+    this.linkCopy.tags = this.tags;
     this.link = this.linkCopy;
     if (isNullOrUndefined(this.link.id)) {
       console.log('Creating link');
@@ -74,7 +94,10 @@ export class AddLinkComponent implements OnInit {
     }
   }
 
-  defineTitle() {
+  /**
+   * Define the screen title
+   */
+  defineScreenTitle() {
     if (!isNaN(this.linkId)) {
       this.title = 'Link update';
     } else {
@@ -82,22 +105,33 @@ export class AddLinkComponent implements OnInit {
     }
   }
 
-  private associateTags(form: any) {
-    this.linkCopy.tags = [];
-    if (form.target.tag1.value !== '') {
-      this.linkCopy.tags.push(new Tag(0, form.target.tag1.value));
+  /**
+   * Adjust the tags list
+   */
+  addTag() {
+    if (this.checkIfAtLeastOneTagsExist()) {
+      this.atLeastOneTag = true;
     }
-    if (form.target.tag2.value !== '') {
-      this.linkCopy.tags.push(new Tag(0, form.target.tag2.value));
-    }
-    if (form.target.tag3.value !== '') {
-      this.linkCopy.tags.push(new Tag(0, form.target.tag3.value));
-    }
-    if (form.target.tag4.value !== '') {
-      this.linkCopy.tags.push(new Tag(0, form.target.tag4.value));
-    }
-    if (form.target.tag5.value !== '') {
-      this.linkCopy.tags.push(new Tag(0, form.target.tag5.value));
-    }
+  }
+
+  /**
+   * Check if at least one tag is filled in the form
+   */
+  private checkIfAtLeastOneTagsExist() {
+    const filledTags = this.tags.filter(value => value.name !== '');
+    return filledTags.length > 0;
+  }
+
+  /**
+   * Put id's tags to 0 if there is a name defined and the tag does not exist
+   * and remove the tags not filled
+   */
+  private fillFieldsTags() {
+    this.tags.forEach(value => {
+      if (isNullOrUndefined(value.id) && !isNullOrUndefined(value.name)) {
+        value.id = 0;
+      }
+    });
+    this.tags = this.tags.filter(value => !isNullOrUndefined(value.name));
   }
 }
