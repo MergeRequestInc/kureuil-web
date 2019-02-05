@@ -32,6 +32,7 @@ import { ManageChannelComponent } from './modals/manage-channel/manage-channel.c
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import { AddLinkComponent } from './add-link/add-link.component';
 import { LinksListComponent } from './links-list/links-list.component';
+import {AutoCompleteModule} from 'primeng/primeng';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -68,6 +69,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MenuModule,
     ButtonModule,
     VirtualScrollerModule,
+    AutoCompleteModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

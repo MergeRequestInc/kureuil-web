@@ -5,6 +5,7 @@ import {isNullOrUndefined} from 'util';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MessageService} from 'primeng/api';
 import {Tag} from '../model/tag';
+import {TagService} from '../services-api/tag.service';
 
 @Component({
   selector: 'app-add-link',
@@ -20,50 +21,42 @@ export class AddLinkComponent implements OnInit {
   title: string;
   loading = false;
   atLeastOneTag: boolean;
-  tag1: Tag;
-  tag2: Tag;
-  tag3: Tag;
-  tag4: Tag;
-  tag5: Tag;
   tags: Tag[];
   urlFilled: boolean;
+
+  filteredTags: Tag[];
+
 
   constructor (
     private router: Router,
     private messageService: MessageService,
     private linkService: LinkService,
+    private tagService: TagService,
     private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.atLeastOneTag = false;
+    this.filteredTags = [];
     this.sub = this.route.params.subscribe(params => {
       this.linkId = +params['linkId'];
     });
+
     this.defineScreenTitle();
     if (!isNaN(this.linkId)) {
       this.linkService.getById(this.linkId).subscribe(link => {
         this.urlFilled = true;
         this.link = link[0];
         this.linkCopy = Object.assign({}, this.link);
+        this.tags = this.link.tags;
 
-        this.tag1 = (isNullOrUndefined(this.link.tags[0])) ? new Tag() : this.link.tags[0];
-        this.tag2 = (isNullOrUndefined(this.link.tags[1])) ? new Tag() : this.link.tags[1];
-        this.tag3 = (isNullOrUndefined(this.link.tags[2])) ? new Tag() : this.link.tags[2];
-        this.tag4 = (isNullOrUndefined(this.link.tags[3])) ? new Tag() : this.link.tags[3];
-        this.tag5 = (isNullOrUndefined(this.link.tags[4])) ? new Tag() : this.link.tags[4];
-        this.tags = [this.tag1, this.tag2, this.tag3, this.tag4, this.tag5];
         this.checkIfAtLeastOneTagsExist();
         console.log(this.atLeastOneTag);
       });
     } else {
       this.urlFilled = false;
       this.linkCopy = Object.assign({}, this.link);
-      this.tag1 = new Tag();
-      this.tag2 = new Tag();
-      this.tag3 = new Tag();
-      this.tag4 = new Tag();
-      this.tag5 = new Tag();
-      this.tags = [this.tag1, this.tag2, this.tag3, this.tag4, this.tag5];
+
+      this.tags = [];
       console.log(this.atLeastOneTag);
     }
   }
@@ -146,5 +139,29 @@ export class AddLinkComponent implements OnInit {
    */
   changeUrl() {
     this.urlFilled = !(isNullOrUndefined(this.linkCopy.url) || this.linkCopy.url === '');
+  }
+
+
+  setFilter(event) {
+    console.log(event);
+    this.tagService.getAllTags().subscribe( tags => {
+      this.filteredTags = AddLinkComponent.filterTags(event.query, tags);
+    }, () => {
+      this.messageService.add({severity: 'error', summary: 'Error',
+        detail: 'An error occured, can not get tags.'});
+      console.log('error while loading tags');
+    });
+  }
+
+  static filterTags(filter, tags: Tag[]): Tag[] {
+    const filtered: Tag[] = [];
+    for (let i = 0; i < tags.length; i++) {
+      const aTag = tags[i];
+      if (aTag.name.toLowerCase().indexOf((filter.toLowerCase())) === 0) {
+        filtered.push(aTag);
+      }
+      // TODO else add a new tag
+    }
+    return filtered;
   }
 }
