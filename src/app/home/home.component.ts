@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LinkService} from '../services-api/link.service';
 import {Link} from '../model/link';
 import {Channel} from '../model/channel';
+import {ChannelService} from '../services-api/channel.service';
 
 /**
  * Home component
@@ -24,15 +25,15 @@ export class HomeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private linkService: LinkService
+    private linkService: LinkService,
+    private channelService: ChannelService
   ) { }
 
   ngOnInit() {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
 
-    // TODO load links of the first channel
-
+    this.loadLinksOfFirstChannel();
   }
 
   /**
@@ -83,5 +84,17 @@ export class HomeComponent implements OnInit {
     this.channelTitle = channelClicked.name;
     this.selectedChannel = channelClicked;
     this.loadQuery(channelClicked.query);
+  }
+
+  /**
+   * Load the links associated to the first channel of the connected user
+   */
+  private loadLinksOfFirstChannel() {
+    this.channelService.loadChannelsByUser().subscribe( channels => {
+      if (channels.length > 0) {
+        this.selectedChannel = channels[0];
+        this.loadLinksLinkedToChannel(this.selectedChannel);
+      }
+    });
   }
 }
