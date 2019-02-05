@@ -145,7 +145,7 @@ export class AddLinkComponent implements OnInit {
   setFilter(event) {
     console.log(event);
     this.tagService.getAllTags().subscribe( tags => {
-      this.filteredTags = AddLinkComponent.filterTags(event.query, tags);
+      this.filteredTags = this.filterTags(event.query, tags);
     }, () => {
       this.messageService.add({severity: 'error', summary: 'Error',
         detail: 'An error occured, can not get tags.'});
@@ -153,7 +153,7 @@ export class AddLinkComponent implements OnInit {
     });
   }
 
-  static filterTags(filter, tags: Tag[]): Tag[] {
+  filterTags(filter, tags: Tag[]): Tag[] {
     const filtered: Tag[] = [];
     for (let i = 0; i < tags.length; i++) {
       const aTag = tags[i];
