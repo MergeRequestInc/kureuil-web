@@ -57,7 +57,6 @@ export class AddLinkComponent implements OnInit {
       this.linkCopy = Object.assign({}, this.link);
 
       this.tags = [];
-      console.log(this.atLeastOneTag);
     }
   }
 
@@ -106,14 +105,6 @@ export class AddLinkComponent implements OnInit {
   }
 
   /**
-   * Adjust the tags list
-   */
-  addTag() {
-    this.atLeastOneTag = this.checkIfAtLeastOneTagsExist();
-    console.log('add Tag ' + this.atLeastOneTag);
-  }
-
-  /**
    * Check if at least one tag is filled in the form
    */
   private checkIfAtLeastOneTagsExist() {
@@ -135,13 +126,17 @@ export class AddLinkComponent implements OnInit {
   }
 
   /**
-   * Function called when the user change the URL
+   * Function called when the user changes the URL
    */
   changeUrl() {
     this.urlFilled = !(isNullOrUndefined(this.linkCopy.url) || this.linkCopy.url === '');
   }
 
 
+  /**
+   * This function gets all tags from back-end and then, get the suggestion list from filterTags().
+   * @param event : event triggered when user enters tags
+   */
   setFilter(event) {
     this.tagService.getAllTags().subscribe( tags => {
       this.filteredTags = this.filterTags(event.query, tags);
@@ -152,6 +147,11 @@ export class AddLinkComponent implements OnInit {
     });
   }
 
+  /**
+   * This function creates a suggestion list or add a new tag if it doesnt exist in tags.
+   * @param filter : the current input in <p-autoComplete> input.
+   * @param tags : list of all tags from back-end.
+   */
   filterTags(filter, tags: Tag[]): Tag[] {
     const filtered: Tag[] = [];
     for (let i = 0; i < tags.length; i++) {
@@ -167,5 +167,12 @@ export class AddLinkComponent implements OnInit {
     }
     console.log(this.tags);
     return filtered;
+  }
+
+  /**
+   * Called when users unselects tags, check if at least one tag is present in the input.
+   */
+  unselectValues() {
+    this.atLeastOneTag = this.checkIfAtLeastOneTagsExist();
   }
 }
