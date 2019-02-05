@@ -43,7 +43,7 @@ export class AddLinkComponent implements OnInit {
     if (!isNaN(this.linkId)) {
       this.linkService.getById(this.linkId).subscribe(link => {
         this.urlFilled = true;
-        this.link = link[0]; // TODO fix result from back
+        this.link = link;
         this.linkCopy = Object.assign({}, this.link);
 
         this.tag1 = (isNullOrUndefined(this.link.tags[0])) ? new Tag() : this.link.tags[0];

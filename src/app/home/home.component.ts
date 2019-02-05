@@ -91,8 +91,10 @@ export class HomeComponent implements OnInit {
    */
   private loadLinksOfFirstChannel() {
     this.channelService.loadChannelsByUser().subscribe( channels => {
-      this.selectedChannel = channels[0];
-      this.loadLinksLinkedToChannel(this.selectedChannel);
+      if (channels.length > 0) {
+        this.selectedChannel = channels[0];
+        this.loadLinksLinkedToChannel(this.selectedChannel);
+      }
     });
   }
 }
