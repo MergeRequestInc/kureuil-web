@@ -12,7 +12,7 @@
         <span class="ui-fluid">
           <p-autoComplete [(ngModel)]="tags" [suggestions]="filteredTags" (completeMethod)="setFilter($event)"
                           styleClass="wid100" [minlength]="1" placeholder="Tags" field="name" [multiple]="true"
-                          [ngModelOptions]="{standalone: true}" [disabled]="tags.length > 4"
+                          [ngModelOptions]="{standalone: true}" [readonly]="tags.length > 4"
                           (onUnselect)="unselectValues()">
           </p-autoComplete>
         </span>
