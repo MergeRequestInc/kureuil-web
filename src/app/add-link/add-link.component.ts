@@ -143,7 +143,6 @@ export class AddLinkComponent implements OnInit {
 
 
   setFilter(event) {
-    console.log(event);
     this.tagService.getAllTags().subscribe( tags => {
       this.filteredTags = this.filterTags(event.query, tags);
     }, () => {
@@ -160,8 +159,13 @@ export class AddLinkComponent implements OnInit {
       if (aTag.name.toLowerCase().indexOf((filter.toLowerCase())) === 0) {
         filtered.push(aTag);
       }
-      // TODO else add a new tag
     }
+    if (filter.substr(filter.length - 1) === ' ' && filter.length > 1) {
+      const newTag: Tag = new Tag();
+      newTag.name = filter.substr(0, filter.length - 1);
+      this.tags.push(newTag);
+    }
+    console.log(this.tags);
     return filtered;
   }
 }
