@@ -97,4 +97,8 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+
+  reloadLinks() {
+    this.loadLinksOfFirstChannel();
+  }
 }

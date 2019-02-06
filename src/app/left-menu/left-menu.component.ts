@@ -22,6 +22,8 @@ export class LeftMenuComponent implements OnInit {
   channelsCopy: Channel[];
   /** Channel clicked */
   @Output() channelClicked: EventEmitter<Channel> = new EventEmitter<Channel>();
+  /** Channel deleted */
+  @Output() channelDeletedOrEdited: EventEmitter<any> = new EventEmitter<any>();
 
   /** Constructor */
   constructor(
@@ -64,6 +66,7 @@ export class LeftMenuComponent implements OnInit {
     modalRef.componentInstance.channel = channel;
     modalRef.result.then( (result) => {
       console.log(result);
+      this.channelDeletedOrEdited.emit();
       this.loadAllChannels();
     }, (reason) => {
       console.log('Dismissed : ' + reason);
@@ -80,6 +83,7 @@ export class LeftMenuComponent implements OnInit {
         severity: 'success', summary: 'Success',
         detail: 'Channel deleted.'
       });
+      this.channelDeletedOrEdited.emit();
       this.loadAllChannels();
     }, () => {
       this.messageService.add({
