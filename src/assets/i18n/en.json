@@ -57,5 +57,15 @@
   "placeholder": {
     "enter.login": "Enter login",
     "password": "Password"
+  },
+
+  "messages": {
+    "error": {
+      "occured": "An error occured, please contact an administrator",
+      "url.exists": "URL already exists"
+    },
+    "success": {
+      "link.added": "Link added"
+    }
   }
 }
