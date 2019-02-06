@@ -5,6 +5,7 @@ import {isNullOrUndefined} from 'util';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MessageService} from 'primeng/api';
 import {Tag} from '../model/tag';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-link',
@@ -32,7 +33,8 @@ export class AddLinkComponent implements OnInit {
     private router: Router,
     private messageService: MessageService,
     private linkService: LinkService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private translateService: TranslateService) { }
 
   ngOnInit() {
     this.atLeastOneTag = false;
@@ -73,7 +75,7 @@ export class AddLinkComponent implements OnInit {
     this.fillFieldsTags();
     this.linkCopy.tags = this.tags;
     this.link = this.linkCopy;
-    if (isNullOrUndefined(this.link.id)) {
+    if (isNullOrUndefined(this.link.id) || this.link.id === 0) {
       console.log('Creating link');
       this.link.id = 0;
       this.linkService.create(this.link).subscribe( () => {
@@ -81,9 +83,18 @@ export class AddLinkComponent implements OnInit {
         this.loading = false;
         this.router.navigate( ['/']);
       },
-        () => {
-          this.messageService.add({severity: 'error', summary: 'Error',
-            detail: 'An error occured, please contact an administrator'});
+        (error) => {
+        if (error.status === 400 && error.error === 'Future.filter predicate is not satisfied') {
+          this.translateService.get('messages.error.url.exists').subscribe((msg) => {
+            this.messageService.add({severity: 'error', summary: 'Error',
+              detail: msg});
+          });
+        } else {
+          this.translateService.get('messages.error.occured').subscribe((msg) => {
+            this.messageService.add({severity: 'error', summary: 'Error',
+              detail: msg});
+          });
+        }
           this.loading = false;
       });
     } else {
