@@ -54,8 +54,7 @@ export class AddLinkComponent implements OnInit {
         this.tag4 = (isNullOrUndefined(this.link.tags[3])) ? new Tag() : this.link.tags[3];
         this.tag5 = (isNullOrUndefined(this.link.tags[4])) ? new Tag() : this.link.tags[4];
         this.tags = [this.tag1, this.tag2, this.tag3, this.tag4, this.tag5];
-        this.checkIfAtLeastOneTagsExist();
-        console.log(this.atLeastOneTag);
+        this.atLeastOneTag = this.checkIfAtLeastOneTagsExist();
       });
     } else {
       this.urlFilled = false;
@@ -128,7 +127,6 @@ export class AddLinkComponent implements OnInit {
    */
   addTag() {
     this.atLeastOneTag = this.checkIfAtLeastOneTagsExist();
-    console.log('add Tag ' + this.atLeastOneTag);
   }
 
   /**
