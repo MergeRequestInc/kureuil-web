@@ -94,6 +94,9 @@ export class HomeComponent implements OnInit {
       if (channels.length > 0) {
         this.selectedChannel = channels[0];
         this.loadLinksLinkedToChannel(this.selectedChannel);
+      } else {
+        this.channelTitle = '';
+        this.links = [];
       }
     });
   }
