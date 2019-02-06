@@ -1,5 +1,5 @@
 <app-left-menu class="ui-g-4 bg-dark" (channelClicked)= "loadLinksLinkedToChannel($event)"
-               (channelDeleted)="reloadLinks()"></app-left-menu>
+               (channelDeletedOrEdited)="reloadLinks()"></app-left-menu>
 <div class="ui-g-8">
   <h1> {{channelTitle}}</h1>
   <button type="button" (click)="newLink()" class="btn btn-primary">{{'buttons.newLink' | translate}}</button>
