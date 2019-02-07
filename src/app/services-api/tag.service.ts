@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Tag} from '../model/tag';
 import {SERVER_API_URL} from '../services-common/constants/app.constants';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +12,29 @@ export class TagService {
   constructor(private http: HttpClient) {
   }
 
-  create(tag: Tag) {
-    return this.http.post(SERVER_API_URL + 'tags', tag);
+  /**
+   * Create a tag
+   * @param tag: tag to create
+   * @returns Observable<Tag>: tag created
+   */
+  create(tag: Tag): Observable<Tag> {
+    return this.http.post<Tag>(SERVER_API_URL + 'tags', tag);
   }
 
-  getByLinkId(linkId: number) {
+  /**
+   * Get tags by link id
+   * @param linkId: id of the link
+   * @returns Observable<Tag[]>: list of tags found
+   */
+  getByLinkId(linkId: number): Observable<Tag[]> {
     return this.http.get<Tag[]>( SERVER_API_URL + 'tags/' + linkId);
   }
 
-  getAllTags() {
+  /**
+   * Get all tags
+   * @returns Observable<Tag[]>: list of all tags
+   */
+  getAllTags(): Observable<Tag[]> {
     return this.http.get<Tag[]>(SERVER_API_URL + 'tags');
   }
 }
