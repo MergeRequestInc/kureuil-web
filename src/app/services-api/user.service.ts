@@ -16,6 +16,7 @@ export class UserService {
 
     /**
      * Get all the users (as admin)
+     * @returns Observable<User[]>: all users
      */
     getAll(): Observable<User[]> {
         return this.http.get<User[]>(SERVER_API_URL + `users`);
@@ -24,30 +25,37 @@ export class UserService {
     /**
      * Get a user by id
      * @param id : user's id
+     * @returns Observable<User>: user found
      */
-    getById(id: number) {
-        return this.http.get(SERVER_API_URL + `users/` + id);
+    getById(id: number): Observable<User> {
+        return this.http.get<User>(SERVER_API_URL + `users/` + id);
     }
 
-    getByEmail(email: string) {
-      return this.http.get(SERVER_API_URL + 'users/' + email);
+  /**
+   * Get a user by email
+   * @param email: user's email
+   * @returns Observable<User>: user found
+   */
+  getByEmail(email: string): Observable<User> {
+      return this.http.get<User>(SERVER_API_URL + 'users/' + email);
     }
 
     /**
      * Create a user
      * @param user: user to create
+     * @returns Observable<User>: user created
      */
-    create(user: User) {
-        return this.http.post(SERVER_API_URL + `users`, user);
-        // return localStorage.setItem('isLoggedIn', 'true'); // A TESTER
+    create(user: User): Observable<User> {
+        return this.http.post<User>(SERVER_API_URL + `users`, user);
     }
 
     /**
      * Update a user
      * @param user: user to update
+     * @returns Observable<User>: user updated
      */
-    update(user: User) {
-        return this.http.put(SERVER_API_URL + `users`, user);
+    update(user: User): Observable<User>  {
+        return this.http.put<User>(SERVER_API_URL + `users`, user);
     }
 
     /**
