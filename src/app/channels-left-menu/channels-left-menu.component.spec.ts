@@ -1,18 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LeftMenuComponent } from './left-menu.component';
+import { ChannelsLeftMenuComponent } from './channels-left-menu.component';
 import {ToastModule} from 'primeng/toast';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {MessageService} from 'primeng/api';
 
-describe('LeftMenuComponent', () => {
-  let component: LeftMenuComponent;
-  let fixture: ComponentFixture<LeftMenuComponent>;
+describe('ChannelsLeftMenuComponent', () => {
+  let component: ChannelsLeftMenuComponent;
+  let fixture: ComponentFixture<ChannelsLeftMenuComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LeftMenuComponent ],
+      declarations: [ ChannelsLeftMenuComponent ],
       imports: [ToastModule, VirtualScrollerModule, HttpClientTestingModule],
       providers: [MessageService]
     })
@@ -20,7 +20,7 @@ describe('LeftMenuComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LeftMenuComponent);
+    fixture = TestBed.createComponent(ChannelsLeftMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

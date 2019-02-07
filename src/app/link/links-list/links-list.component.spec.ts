@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LinksListComponent } from './links-list.component';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {Link} from '../model/link';
+import {Link} from '../../model/link';
 
 describe('LinksListComponent', () => {
   let component: LinksListComponent;

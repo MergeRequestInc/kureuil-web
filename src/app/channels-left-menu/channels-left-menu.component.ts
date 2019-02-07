@@ -11,10 +11,10 @@ import {isUndefined} from 'util';
  */
 @Component({
   selector: 'app-left-menu',
-  templateUrl: './left-menu.component.html',
-  styleUrls: ['./left-menu.component.css']
+  templateUrl: './channels-left-menu.component.html',
+  styleUrls: ['./channels-left-menu.component.css']
 })
-export class LeftMenuComponent implements OnInit {
+export class ChannelsLeftMenuComponent implements OnInit {
 
   /** List of user's channels */
   channels: Channel[];

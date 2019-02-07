@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Link} from '../model/link';
-import {Tag} from '../model/tag';
-import {TagService} from '../services-api/tag.service';
+import {Link} from '../../model/link';
+import {Tag} from '../../model/tag';
+import {TagService} from '../../services-api/tag.service';
 
 @Component({
   selector: 'app-links-list',
