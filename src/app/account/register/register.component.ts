@@ -33,9 +33,14 @@ export class RegisterComponent {
           this.loading = false;
           this.router.navigate(['login']);
         },
-        () => {
-          this.messageService.add({severity: 'error', summary: 'Error',
-            detail: 'Registration impossible. Please contact an administrator'});
+        (error) => {
+          if (error.status === 400) {
+            this.messageService.add({severity: 'error', summary: 'Error',
+              detail: 'User already exists or an error occured'});
+          } else {
+            this.messageService.add({severity: 'error', summary: 'Error',
+              detail: 'Registration impossible. Please contact an administrator'});
+          }
           this.loading = false;
         });
   }
