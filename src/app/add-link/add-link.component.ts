@@ -145,6 +145,9 @@ export class AddLinkComponent implements OnInit {
     this.tags.forEach(value => {
       if (isNullOrUndefined(value.id) && !isNullOrUndefined(value.name)) {
         value.id = 0;
+      } else if (value.name === '') {
+        value.id = undefined;
+        value.name = undefined;
       }
     });
     this.tags = this.tags.filter(value => !isNullOrUndefined(value.name));
