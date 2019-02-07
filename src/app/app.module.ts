@@ -30,7 +30,7 @@ import { ChannelsLeftMenuComponent } from './channels-left-menu/channels-left-me
 import { ManageChannelComponent } from './modals/manage-channel/manage-channel.component';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import { ManageLinkComponent } from './link/manage-link/manage-link.component';
-import { LinksListComponent } from './link/links-list/links-list.component';
+import { LinkItemComponent } from './link/link-item/link-item.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -49,7 +49,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ChannelsLeftMenuComponent,
     ManageChannelComponent,
     ManageLinkComponent,
-    LinksListComponent
+    LinkItemComponent
   ],
   imports: [
     NgbModule,
