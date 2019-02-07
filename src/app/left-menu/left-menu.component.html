@@ -13,7 +13,7 @@
         <div class="ui-g channel-item">
           <div class="ui-g-12 channel-name">
             <div class="ui-g-8">
-              <button class="btn border-secondary" (click)="loadLinks(channel)">{{channel.name}}</button>
+              <button type="button" pButton class="ui-button-secondary" (click)="loadLinks(channel)" label="{{channel.name}}"></button>
             </div>
             <div class="ui-g-4 ui-inputgroup">
               <button type="button" class="ui-button" pButton icon="pi pi-pencil"
