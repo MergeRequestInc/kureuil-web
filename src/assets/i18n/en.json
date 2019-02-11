@@ -65,7 +65,8 @@
       "url.exists": "URL already exists"
     },
     "success": {
-      "link.added": "Link added"
+      "link.added": "Link added",
+      "link.updated": "Link updated"
     }
   }
 }
