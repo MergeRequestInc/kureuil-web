@@ -1,18 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {LinkService} from '../services-api/link.service';
-import {Link} from '../model/link';
+import {LinkService} from '../../services-api/link.service';
+import {Link} from '../../model/link';
 import {isNullOrUndefined} from 'util';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MessageService} from 'primeng/api';
-import {Tag} from '../model/tag';
+import {Tag} from '../../model/tag';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-link',
-  templateUrl: './add-link.component.html',
-  styleUrls: ['./add-link.component.css']
+  templateUrl: './manage-link.component.html',
+  styleUrls: ['./manage-link.component.css']
 })
-export class AddLinkComponent implements OnInit {
+export class ManageLinkComponent implements OnInit {
 
   private sub: any;
   linkId = 0;

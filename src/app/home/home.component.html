@@ -4,9 +4,9 @@
   <h1> {{channelTitle}}</h1>
   <button type="button" (click)="newLink()" class="btn btn-primary">{{'buttons.newLink' | translate}}</button>
   <div *ngFor="let link of links" class="ui-g-9">
-      <app-links-list class="ui-g-6"
-        [link] = "link">
-      </app-links-list>
+      <app-link-item class="ui-g-6"
+                     [link] = "link">
+      </app-link-item>
       <div class="ui-g-3 btn-group" role="group">
         <button type="button" class="btn btn-primary btn-group" (click)="updateLink(link.id)">{{'buttons.upLink' | translate}}</button>
         <button type="button" class="btn btn-danger btn-group" (click)="deleteLink(link)">{{'buttons.delLink' | translate}}</button>

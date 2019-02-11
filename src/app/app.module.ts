@@ -26,12 +26,11 @@ import {ForgottenPwdComponent} from './account/forgotten-pwd/forgotten-pwd.compo
 import {ChangePwdComponent} from './account/change-pwd/change-pwd.component';
 import {MenuModule} from 'primeng/menu';
 import {ButtonModule} from 'primeng/button';
-import { LeftMenuComponent } from './left-menu/left-menu.component';
-import { OptionsMenuComponent } from './options-menu/options-menu.component';
+import { ChannelsLeftMenuComponent } from './channels-left-menu/channels-left-menu.component';
 import { ManageChannelComponent } from './modals/manage-channel/manage-channel.component';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
-import { AddLinkComponent } from './add-link/add-link.component';
-import { LinksListComponent } from './links-list/links-list.component';
+import { ManageLinkComponent } from './link/manage-link/manage-link.component';
+import { LinkItemComponent } from './link/link-item/link-item.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -47,11 +46,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     TagsUrlComponent,
     ForgottenPwdComponent,
     ChangePwdComponent,
-    LeftMenuComponent,
-    OptionsMenuComponent,
+    ChannelsLeftMenuComponent,
     ManageChannelComponent,
-    AddLinkComponent,
-    LinksListComponent
+    ManageLinkComponent,
+    LinkItemComponent
   ],
   imports: [
     NgbModule,

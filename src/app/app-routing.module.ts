@@ -5,7 +5,7 @@ import {RegisterComponent} from './account/register/register.component';
 import {ForgottenPwdComponent} from './account/forgotten-pwd/forgotten-pwd.component';
 import {ChangePwdComponent} from './account/change-pwd/change-pwd.component';
 import {AuthorizationOnlineService} from './services-api/authorization-online.service';
-import {AddLinkComponent} from './add-link/add-link.component';
+import {ManageLinkComponent} from './link/manage-link/manage-link.component';
 
 
 /**
@@ -17,6 +17,6 @@ export const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'forgotPwd', component: ForgottenPwdComponent},
   {path: 'newPwd', component: ChangePwdComponent},
-  {path: 'newLink', component: AddLinkComponent},
-  {path: 'editLink/:linkId', component: AddLinkComponent}
+  {path: 'newLink', component: ManageLinkComponent},
+  {path: 'editLink/:linkId', component: ManageLinkComponent}
 ];

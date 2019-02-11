@@ -1,18 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddLinkComponent } from './add-link.component';
+import { ManageLinkComponent } from './manage-link.component';
 import {FormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MessageService} from 'primeng/api';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 
-describe('AddLinkComponent', () => {
-  let component: AddLinkComponent;
-  let fixture: ComponentFixture<AddLinkComponent>;
+describe('ManageLinkComponent', () => {
+  let component: ManageLinkComponent;
+  let fixture: ComponentFixture<ManageLinkComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddLinkComponent ],
+      declarations: [ ManageLinkComponent ],
       imports: [FormsModule, RouterTestingModule, HttpClientTestingModule],
       providers: [MessageService]
     })
@@ -20,7 +20,7 @@ describe('AddLinkComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddLinkComponent);
+    fixture = TestBed.createComponent(ManageLinkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
