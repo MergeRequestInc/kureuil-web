@@ -21,7 +21,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {AuthExpiredInterceptor} from './services-common/interceptor/auth-expired.interceptor';
 import {AuthInterceptor} from './services-common/interceptor/auth.interceptor';
-import {TagsUrlComponent} from './ia/tags-url/tags-url.component';
 import {ForgottenPwdComponent} from './account/forgotten-pwd/forgotten-pwd.component';
 import {ChangePwdComponent} from './account/change-pwd/change-pwd.component';
 import {MenuModule} from 'primeng/menu';
@@ -43,7 +42,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegisterComponent,
     HomeComponent,
     NavbarComponent,
-    TagsUrlComponent,
     ForgottenPwdComponent,
     ChangePwdComponent,
     ChannelsLeftMenuComponent,
