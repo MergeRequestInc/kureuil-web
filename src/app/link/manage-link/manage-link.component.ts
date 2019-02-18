@@ -121,7 +121,7 @@ export class ManageLinkComponent implements OnInit {
         allTags = tags;
 
         this.tags.forEach(value => {
-          if (isNullOrUndefined(value.id) && !isNullOrUndefined(value.name)) { // tag creation
+          if (isNullOrUndefined(value.id) && !isNullOrUndefined(value.name)) { // tag creation in new input
             value.id = 0; // The back waits id = 0 at creation
           } else if (value.name === '') { // tag deletion
             value.id = undefined;
@@ -129,7 +129,11 @@ export class ManageLinkComponent implements OnInit {
           } else if (!isNullOrUndefined(value.name)) {
             // Check if tag already exists and assign the right id
             const foundTag = allTags.find(tag => tag.name === value.name);
-            value.id = foundTag.id;
+            if (!isNullOrUndefined(foundTag)) {
+              value.id = foundTag.id;
+            } else { // tag creation in an input where old tag was present
+              value.id = 0;
+            }
           }
         });
         this.tags = this.tags.filter(value => !isNullOrUndefined(value.name));
