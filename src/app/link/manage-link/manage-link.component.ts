@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MessageService} from 'primeng/api';
 import {Tag} from '../../model/tag';
 import {TranslateService} from '@ngx-translate/core';
+import {TagService} from '../../services-api/tag.service';
 
 @Component({
   selector: 'app-add-link',
@@ -46,7 +47,9 @@ export class ManageLinkComponent implements OnInit {
     private messageService: MessageService,
     private linkService: LinkService,
     private route: ActivatedRoute,
-    private translateService: TranslateService) { }
+    private translateService: TranslateService,
+    private tagService: TagService
+  ) { }
 
   ngOnInit() {
     this.atLeastOneTag = false;
@@ -66,14 +69,15 @@ export class ManageLinkComponent implements OnInit {
    */
   save() {
     this.loading = true;
-    this.fillFieldsTags();
-    this.linkCopy.tags = this.tags;
-    this.link = this.linkCopy;
-    if (isNullOrUndefined(this.link.id) || this.link.id === 0) {
-      this.createLink();
-    } else {
-      this.updateLink();
-    }
+    this.fillFieldsTags().then(() => {
+      this.linkCopy.tags = this.tags;
+      this.link = this.linkCopy;
+      if (isNullOrUndefined(this.link.id) || this.link.id === 0) {
+        this.createLink();
+      } else {
+        this.updateLink();
+      }
+    });
   }
 
   /**
@@ -107,19 +111,31 @@ export class ManageLinkComponent implements OnInit {
   }
 
   /**
-   * Put id's tags to 0 if there is a name defined and the tag does not exist
-   * and remove the tags not filled
+   * Put id's tags to 0 if there is a name defined and the tag does not exist,
+   * remove the tags not filled, and fill the right id to an existent tag
    */
-  private fillFieldsTags() {
-    this.tags.forEach(value => {
-      if (isNullOrUndefined(value.id) && !isNullOrUndefined(value.name)) {
-        value.id = 0; // The back waits id = 0 at creation
-      } else if (value.name === '') {
-        value.id = undefined;
-        value.name = undefined;
-      }
+  private fillFieldsTags(): Promise<any> {
+    return new Promise<any>((resolve) => {
+      let allTags: Tag[] = [];
+      this.tagService.getAllTags().subscribe(tags => {
+        allTags = tags;
+
+        this.tags.forEach(value => {
+          if (isNullOrUndefined(value.id) && !isNullOrUndefined(value.name)) { // tag creation
+            value.id = 0; // The back waits id = 0 at creation
+          } else if (value.name === '') { // tag deletion
+            value.id = undefined;
+            value.name = undefined;
+          } else if (!isNullOrUndefined(value.name)) {
+            // Check if tag already exists and assign the right id
+            const foundTag = allTags.find(tag => tag.name === value.name);
+            value.id = foundTag.id;
+          }
+        });
+        this.tags = this.tags.filter(value => !isNullOrUndefined(value.name));
+        resolve();
+      });
     });
-    this.tags = this.tags.filter(value => !isNullOrUndefined(value.name));
   }
 
   /**
