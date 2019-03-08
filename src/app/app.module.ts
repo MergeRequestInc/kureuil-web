@@ -17,6 +17,7 @@ import {RegisterComponent} from './account/register/register.component';
 import {UserService} from './services-api/user.service';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
+import {MessageModule} from 'primeng/message';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {AuthExpiredInterceptor} from './services-common/interceptor/auth-expired.interceptor';
@@ -31,6 +32,7 @@ import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import { ManageLinkComponent } from './link/manage-link/manage-link.component';
 import { LinkItemComponent } from './link/link-item/link-item.component';
 import { LinkListComponent } from './link/link-list/link-list.component';
+import {KeyFilterModule} from 'primeng/keyfilter';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -49,7 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ManageChannelComponent,
     ManageLinkComponent,
     LinkItemComponent,
-    LinkListComponent
+    LinkListComponent,
   ],
   imports: [
     NgbModule,
@@ -60,11 +62,13 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     RouterModule.forRoot(routes, { useHash: true}),
     FormsModule,
+    MessageModule,
     ReactiveFormsModule,
     HttpClientModule,
     ToastModule,
     MenuModule,
     ButtonModule,
+    KeyFilterModule,
     VirtualScrollerModule,
     TranslateModule.forRoot({
       loader: {
