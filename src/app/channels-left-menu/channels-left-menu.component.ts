@@ -1,10 +1,11 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ManageChannelComponent} from '../modals/manage-channel/manage-channel.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Channel} from '../model/channel';
 import {ChannelService} from '../services-api/channel.service';
 import {MessageService} from 'primeng/api';
 import {isUndefined} from 'util';
+import {LinkChannelService} from '../link/link-channel.service';
 
 /**
  * Component which displays the user's channels
@@ -20,16 +21,13 @@ export class ChannelsLeftMenuComponent implements OnInit {
   channels: Channel[];
   /** Copy of the user's channels */
   channelsCopy: Channel[];
-  /** Channel clicked */
-  @Output() channelClicked: EventEmitter<Channel> = new EventEmitter<Channel>();
-  /** Channel deleted */
-  @Output() channelDeletedOrEdited: EventEmitter<any> = new EventEmitter<any>();
 
   /** Constructor */
   constructor(
     private channelService: ChannelService,
     private messageService: MessageService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private linkChannelInteraction: LinkChannelService
   ) { }
 
   ngOnInit() {
@@ -66,7 +64,7 @@ export class ChannelsLeftMenuComponent implements OnInit {
     modalRef.componentInstance.channel = channel;
     modalRef.result.then( (result) => {
       console.log(result);
-      this.channelDeletedOrEdited.emit();
+      this.linkChannelInteraction.channelClicked(undefined);
       this.loadAllChannels();
     }, (reason) => {
       console.log('Dismissed : ' + reason);
@@ -83,7 +81,7 @@ export class ChannelsLeftMenuComponent implements OnInit {
         severity: 'success', summary: 'Success',
         detail: 'Channel deleted.'
       });
-      this.channelDeletedOrEdited.emit();
+      this.linkChannelInteraction.channelClicked(undefined);
       this.loadAllChannels();
     }, () => {
       this.messageService.add({
@@ -108,6 +106,6 @@ export class ChannelsLeftMenuComponent implements OnInit {
    * @param channel : channel which links we have to retrieve
    */
   loadLinks(channel) {
-    this.channelClicked.emit(channel);
+    this.linkChannelInteraction.channelClicked(channel);
   }
 }

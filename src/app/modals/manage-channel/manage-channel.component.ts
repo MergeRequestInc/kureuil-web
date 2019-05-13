@@ -14,6 +14,8 @@ export class ManageChannelComponent implements OnInit {
   title: string;
   channel: Channel;
   channelCopy: Channel = new Channel();
+  queryRule: RegExp = /^[a-z\d\-_#()\s]+$/i;
+  errorText: string;
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -24,7 +26,39 @@ export class ManageChannelComponent implements OnInit {
     this.channelCopy = Object.assign(this.channelCopy, this.channel);
   }
 
+  checkQuery() {
+    const querySize = this.channelCopy.query.length;
+    let nbOpened = 0;
+    let nbClosed = 0;
+    let current: string;
+    for (let i = 0; i < querySize; ++i) {
+      if (this.channelCopy.query.charAt(i) === '(') {
+        current = '(';
+        ++nbOpened;
+      } else if (this.channelCopy.query.charAt(i) === ')') {
+        current = ')';
+        ++nbClosed;
+      }
+      if (current === ')' && nbOpened === 0) {
+        this.errorText = '"(" is required for every ")".';
+        return false;
+      }
+    }
+    if (nbOpened !== nbClosed) {
+      this.errorText = 'Parenthesis missing';
+      return false;
+    }
+    if (current === '(') {
+      this.errorText = '")" is required for every "(".';
+      return false;
+    }
+    return true;
+  }
+
   save() {
+    if (this.checkQuery() === false) {
+      return;
+    }
     this.channel = this.channelCopy;
     if (isUndefined(this.channel.id)) {
       console.log('save');
