@@ -16,6 +16,7 @@ import {isNullOrUndefined} from 'util';
 export class LinkListComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
+  encodeQuery: string;
   query: string;
   isLoggedIn: Boolean = localStorage.getItem('isLoggedIn') != null;
   links: Link[];
@@ -66,7 +67,8 @@ export class LinkListComponent implements OnInit, OnDestroy {
    * Load the links linked to a query
    */
   loadLinks() {
-    this.linkService.getByQuery(this.query).subscribe( links => this.links = links);
+    this.encodeQuery = this.query.replace('#', '%23');
+    this.linkService.getByQuery(this.encodeQuery).subscribe( links => this.links = links);
   }
 
   /**
